@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Emerald Bintan - Premium Travel</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #224abe;
+            --accent-yellow: #f6c23e;
+            --text-dark: #2c3e50;
+            --bg-light: #f8f9fc;
+        }
+
+        body { font-family: 'Poppins', sans-serif; color: var(--text-dark); overflow-x: hidden; }
+
+        /* --- Utilities & Buttons --- */
+        .text-primary-custom { color: var(--primary-color) !important; }
+        .bg-primary-custom { background-color: var(--primary-color) !important; }
+        
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary-custom:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+        }
+
+        .section-padding { padding: 80px 0; }
+        .section-title { margin-bottom: 50px; position: relative; }
+        .section-title h2 { font-weight: 800; color: var(--text-dark); }
+        .section-title-line::after {
+            content: ''; display: block; width: 60px; height: 4px;
+            background: var(--primary-color); margin: 15px auto 0; border-radius: 2px;
+        }
+
+        /* --- Navbar --- */
+        .navbar { background: white; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
+        .navbar-brand { font-weight: 800; color: var(--primary-color) !important; font-size: 1.5rem; }
+        .nav-link { font-weight: 500; margin-left: 15px; color: var(--text-dark); transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color); }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            position: relative;
+        }
+        .hero-content h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; }
+        .scroll-down {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            animation: bounce 2s infinite; color: white; opacity: 0.8;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);} 40% {transform: translateX(-50%) translateY(-20px);} 60% {transform: translateX(-50%) translateY(-10px);} }
+
+        /* --- PACKAGES STYLING (THE HIGHLIGHT) --- */
+        .nav-pills .nav-link {
+            color: #555; background: white; border: 1px solid #eee; margin: 0 5px;
+            border-radius: 50px; padding: 10px 25px; font-weight: 600;
+        }
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-color); color: white; border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+        }
+
+        /* Featured Deal Card (Horizontal) */
+        .featured-deal {
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 15px 40px rgba(78, 115, 223, 0.1); margin-bottom: 60px;
+            border: 2px solid var(--primary-color);
+        }
+        .featured-img { width: 100%; height: 100%; min-height: 350px; object-fit: cover; }
+        
+        /* Standard Package Card */
+        .package-card {
+            border: none; border-radius: 15px; background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: all 0.3s;
+            height: 100%; display: flex; flex-direction: column; overflow: hidden;
+        }
+        .package-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        
+        .package-thumb { position: relative; height: 220px; overflow: hidden; }
+        .package-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .package-card:hover .package-thumb img { transform: scale(1.1); }
+        
+        .ribbon {
+            position: absolute; top: 15px; right: -30px; width: 120px;
+            background: var(--accent-yellow); color: #333; text-align: center;
+            font-size: 0.75rem; font-weight: 800; padding: 5px 0;
+            transform: rotate(45deg); z-index: 2; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .ribbon.blue { background: var(--primary-color); color: white; }
+
+        .package-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .facility-icons { color: #888; margin-bottom: 20px; font-size: 0.9rem; display: flex; gap: 10px; }
+        .facility-icons i { color: var(--primary-color); }
+        
+        .price-final { font-size: 1.3rem; font-weight: 800; color: var(--primary-color); }
+
+        /* --- Other Sections Styling --- */
+        .feature-box {
+            padding: 30px; background: white; border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.3s; height: 100%;
+        }
+        .feature-box:hover { transform: translateY(-5px); border-bottom: 3px solid var(--primary-color); }
+        .feature-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
+
+        .gallery-item { border-radius: 12px; overflow: hidden; height: 250px; position: relative; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        /* --- Footer --- */
+        footer { background: #1a2530; color: #adb5bd; padding: 70px 0 30px; }
+        .footer-title { color: white; font-weight: 700; margin-bottom: 25px; }
+        .footer-links a { color: #adb5bd; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--primary-color); padding-left: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-gem me-2"></i>Emerald Bintan
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#beranda">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#paket">Paket Tour</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#layanan">Layanan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tentang">Tentang Kami</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="https://wa.me/" class="btn btn-primary-custom">Hubungi Kami</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="beranda" class="hero-section">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up" data-aos-duration="1000">
+                    <h1>Liburan Impian di Bintan Dimulai Di Sini</h1>
+                    <p class="lead mb-4 text-white-50">Dapatkan penawaran eksklusif untuk paket wisata premium, staycation resort mewah, dan petualangan pulau.</p>
+                    <a href="#paket" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom px-5 shadow">Pilih Paket Wisata</a>
+                </div>
+            </div>
+        </div>
+        <a href="#paket" class="scroll-down"><i class="fas fa-chevron-down fa-2x"></i></a>
+    </section>
+
+    <section id="paket" class="section-padding" style="background-color: #fbfbfb;">
+        <div class="container">
+            <div class="section-title text-center section-title-line" data-aos="fade-up">
+                <h2>Pilihan Paket Wisata</h2>
+                <p class="text-muted">Temukan pengalaman terbaik sesuai budget dan gaya liburan Anda</p>
+            </div>
+
+            <div class="row justify-content-center" data-aos="zoom-in">
+                <div class="col-lg-12">
+                    <div class="featured-deal">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-lg-6 position-relative" style="height: 100%;">
+                                <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Special Deal" class="featured-img">
+                                <div class="position-absolute top-0 start-0 m-3 bg-danger text-white px-3 py-1 rounded fw-bold shadow">
+                                    <i class="fas fa-fire me-1"></i> HOT PROMO
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="p-4 p-lg-5">
+                                    <span class="badge bg-primary-custom mb-2">LIMITED OFFER</span>
+                                    <h3 class="fw-bold mb-3">Emerald Luxury Escape (4D3N)</h3>
+                                    <p class="text-muted mb-4">Nikmati kemewahan menginap di Private Pool Villa Bintan. Termasuk Candle Light Dinner, Spa, dan Private Tour keliling pulau dengan armada VIP.</p>
+                                    
+                                    <div class="row mb-4 small text-muted">
+                                        <div class="col-6 mb-2"><i class="fas fa-check text-success me-2"></i>Private Villa</div>
+                                        <div class="col-6 mb-2"><i class="fas fa-check text-success me-2"></i>VIP Transport</div>
+                                        <div class="col-6 mb-2"><i class="fas fa-check text-success me-2"></i>All-Inclusive Meals</div>
+                                        <div class="col-6 mb-2"><i class="fas fa-check text-success me-2"></i>Documentation</div>
+                                    </div>
+
+                                    <div class="d-flex align-items-center justify-content-between border-top pt-3">
+                                        <div>
+                                            <small class="text-decoration-line-through text-muted">IDR 8.500k</small>
+                                            <h3 class="fw-bold text-danger mb-0">IDR 4.250k</h3>
+                                        </div>
+                                        <a href="#" class="btn btn-primary-custom shadow">Ambil Promo</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5 justify-content-center" data-aos="fade-up">
+                <div class="col-auto">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-all">Semua Paket</button></li>
+                        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-oneday">One Day Trip</button></li>
+                        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-stay">Staycation</button></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-all">
+                    <div class="row g-4 align-items-start">
+    
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="package-card"> 
+                                <div class="package-thumb">
+                                    <div class="ribbon">BEST SELLER</div>
+                                    <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Lagoi">
+                                </div>
+                                <div class="package-body">
+                                    <h5 class="fw-bold mb-1">Lagoi Bay Explorer</h5>
+                                    <div class="text-warning small mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                    <p class="text-muted small">Jelajahi kawasan eksklusif Lagoi Bay, Treasure Bay, dan Safari Lagoi dalam 3 hari.</p>
+                                    <div class="facility-icons">
+                                        <span><i class="fas fa-hotel"></i> Hotel</span>
+                                        <span><i class="fas fa-utensils"></i> Makan</span>
+                                        <span><i class="fas fa-car"></i> Mobil</span>
+                                    </div>
+                                    
+                                    <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="text-muted d-block" style="font-size: 0.75rem;">Mulai dari</small>
+                                            <div class="price-final">IDR 2.450k</div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary rounded-pill btn-toggle-detail" type="button" data-bs-toggle="collapse" data-bs-target="#detailLagoi" aria-expanded="false">
+                                            Lihat Detail <i class="fas fa-chevron-down ms-1"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="collapse package-detail-collapse" id="detailLagoi">
+                                    <div class="detail-content">
+                                        <h6 class="detail-heading">Itinerary Singkat</h6>
+                                        <ul class="itinerary-list small text-muted">
+                                            <li><strong>Hari 1:</strong> Jemput Ferry, Check-in, Treasure Bay.</li>
+                                            <li><strong>Hari 2:</strong> Safari Lagoi, Mangrove Tour, BBQ.</li>
+                                            <li><strong>Hari 3:</strong> Belanja Souvenir, Drop Pelabuhan.</li>
+                                        </ul>
+                                        <a href="https://wa.me/?text=Halo" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                            <div class="package-card">
+                                <div class="package-thumb">
+                                    <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gurun">
+                                </div>
+                                <div class="package-body">
+                                    <h5 class="fw-bold mb-1">Bintan Desert Trip</h5>
+                                    <div class="text-warning small mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                                    <p class="text-muted small">Hunting foto di Gurun Pasir Busung & Danau Biru. Full day tour hemat.</p>
+                                    <div class="facility-icons">
+                                        <span><i class="fas fa-ticket-alt"></i> Tiket</span>
+                                        <span><i class="fas fa-utensils"></i> Lunch</span>
+                                        <span><i class="fas fa-camera"></i> Guide</span>
+                                    </div>
+                                    
+                                    <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="text-muted d-block" style="font-size: 0.75rem;">Mulai dari</small>
+                                            <div class="price-final">IDR 550k</div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary rounded-pill btn-toggle-detail" type="button" data-bs-toggle="collapse" data-bs-target="#detailGurun" aria-expanded="false">
+                                            Lihat Detail <i class="fas fa-chevron-down ms-1"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="collapse package-detail-collapse" id="detailGurun">
+                                        <div class="detail-content">
+                                        <h6 class="detail-heading">Itinerary Singkat</h6>
+                                        <ul class="itinerary-list small text-muted">
+                                            <li><strong>10:30:</strong> Gurun Pasir & Danau Biru.</li>
+                                            <li><strong>13:00:</strong> Makan Siang Seafood.</li>
+                                            <li><strong>14:30:</strong> Vihara 1000 Wajah.</li>
+                                        </ul>
+                                        <a href="https://wa.me/?text=Halo" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                            <div class="package-card">
+                                <div class="package-thumb">
+                                    <div class="ribbon blue">POPULAR</div>
+                                    <img src="https://images.unsplash.com/photo-1583205310381-5031db68d226?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Snorkeling">
+                                </div>
+                                <div class="package-body">
+                                    <h5 class="fw-bold mb-1">White Sands Snorkeling</h5>
+                                    <div class="text-warning small mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                    <p class="text-muted small">Snorkeling trip ke White Sands Island + BBQ Dinner di pinggir pantai.</p>
+                                    <div class="facility-icons">
+                                        <span><i class="fas fa-swimmer"></i> Alat</span>
+                                        <span><i class="fas fa-ship"></i> Boat</span>
+                                        <span><i class="fas fa-fish"></i> BBQ</span>
+                                    </div>
+                                    
+                                    <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="text-muted d-block" style="font-size: 0.75rem;">Mulai dari</small>
+                                            <div class="price-final">IDR 1.250k</div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary rounded-pill btn-toggle-detail" type="button" data-bs-toggle="collapse" data-bs-target="#detailSnorkeling" aria-expanded="false">
+                                            Lihat Detail <i class="fas fa-chevron-down ms-1"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="collapse package-detail-collapse" id="detailSnorkeling">
+                                        <div class="detail-content">
+                                        <h6 class="detail-heading">Itinerary Singkat</h6>
+                                        <ul class="itinerary-list small text-muted">
+                                            <li><strong>Hari 1:</strong> Snorkeling, Kayak, BBQ.</li>
+                                            <li><strong>Hari 2:</strong> Sunrise, Pelepasan Tukik.</li>
+                                        </ul>
+                                        <a href="https://wa.me/?text=Halo" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-oneday"><p class="text-center py-5 text-muted">Memuat paket One Day Trip...</p></div>
+                <div class="tab-pane fade" id="pills-stay"><p class="text-center py-5 text-muted">Memuat paket Staycation...</p></div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-outline-primary rounded-pill px-4">Lihat Semua Paket <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-white">
+        <div class="container">
+            <div class="section-title text-center section-title-line" data-aos="fade-up">
+                <h2>Mengapa Kami?</h2>
+            </div>
+            <div class="row g-4 text-center">
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-box">
+                        <i class="fas fa-medal feature-icon"></i>
+                        <h5>Resmi & Terpercaya</h5>
+                        <p class="text-muted small">Legalitas lengkap dan berbadan hukum.</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-box">
+                        <i class="fas fa-tags feature-icon"></i>
+                        <h5>Harga Jujur</h5>
+                        <p class="text-muted small">Tidak ada biaya tersembunyi (No Hidden Cost).</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-box">
+                        <i class="fas fa-users-cog feature-icon"></i>
+                        <h5>Tim Profesional</h5>
+                        <p class="text-muted small">Guide lokal berpengalaman dan ramah.</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-box">
+                        <i class="fas fa-clock feature-icon"></i>
+                        <h5>Layanan 24 Jam</h5>
+                        <p class="text-muted small">Support penuh selama Anda berlibur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tentang" class="section-padding" style="background-color: #f0f2f5;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1576016770483-45853530b61c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="About" class="img-fluid rounded-4 shadow-lg">
+                </div>
+                <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
+                    <div class="section-title section-title-line">
+                        <h2>Tentang Emerald Bintan</h2>
+                    </div>
+                    <p class="text-muted mb-4">Kami bukan sekadar agen perjalanan, kami adalah konsultan liburan Anda di Bintan. Dengan pengalaman lebih dari 5 tahun melayani ribuan wisatawan domestik dan mancanegara, kami paham betul bagaimana menciptakan momen liburan yang tak terlupakan.</p>
+                    
+                    <h5 class="fw-bold mb-3 text-primary-custom" id="layanan">Layanan Kami Lainnya:</h5>
+                    <div class="row g-2">
+                        <div class="col-md-6"><i class="fas fa-check-circle text-success me-2"></i>Sewa Mobil (Lepas Kunci/Driver)</div>
+                        <div class="col-md-6"><i class="fas fa-check-circle text-success me-2"></i>Tiket Ferry Batam - Bintan</div>
+                        <div class="col-md-6"><i class="fas fa-check-circle text-success me-2"></i>Company Gathering (MICE)</div>
+                        <div class="col-md-6"><i class="fas fa-check-circle text-success me-2"></i>Paket Golf Ria Bintan</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-white">
+        <div class="container">
+            <div class="section-title text-center section-title-line mb-5">
+                <h2>Galeri & Testimoni</h2>
+            </div>
+            
+            <div class="row g-3 mb-5">
+                <div class="col-md-4 col-6" data-aos="zoom-in"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
+                <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="100"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1468413253725-0d5181091126?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
+                <div class="col-md-4 col-12" data-aos="zoom-in" data-aos-delay="200"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
+            </div>
+
+            <div class="row justify-content-center" data-aos="fade-up">
+                <div class="col-lg-8 text-center">
+                    <div class="card border-0 shadow-sm p-4 bg-light">
+                        <i class="fas fa-quote-left fa-2x text-primary-custom mb-3 opacity-25"></i>
+                        <figure>
+                            <blockquote class="blockquote">
+                                <p class="fs-5 fst-italic">"Sangat puas dengan pelayanan Emerald Bintan. Drivernya on-time, mobil bersih, dan itinerary-nya fleksibel banget. Recommended!"</p>
+                            </blockquote>
+                            <figcaption class="blockquote-footer mt-2">
+                                Anita Wijaya, <cite title="Source Title">Jakarta</cite>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-primary-custom text-white text-center">
+        <div class="container" data-aos="zoom-in">
+            <h2 class="fw-bold">Sudah Siap Berangkat?</h2>
+            <p class="mb-4 text-white-50">Konsultasikan rencana perjalanan Anda sekarang, Gratis!</p>
+            <a href="https://wa.me/" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom"><i class="fab fa-whatsapp me-2"></i>Chat WhatsApp</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <h5 class="footer-title">Emerald Bintan</h5>
+                    <p class="small">Solusi perjalanan terbaik di Pulau Bintan dengan pelayanan standar internasional dan harga lokal.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="footer-title">Kontak</h5>
+                    <ul class="list-unstyled text-muted small">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Tanjung Pinang, Kepri</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +62 812 3456 7890</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="footer-title">Follow Us</h5>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-5 mb-3 border-secondary">
+            <div class="text-center small">
+                &copy; 2023 Emerald Bintan Tour. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 100, duration: 800 });
+    </script>
+</body>
+</html>
