@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-NOMADS
+Paket Wisata Bintan Murah & Terpercaya | Emerald Bintan Tour
 @endsection
 
 @section('content')
@@ -402,7 +402,7 @@ NOMADS
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-                <img src="https://images.unsplash.com/photo-1576016770483-45853530b61c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="About" class="img-fluid rounded-4 shadow-lg">
+                <img src="https://images.unsplash.com/photo-1576016770483-45853530b61c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Pemandangan Pantai Lagoi Bay Bintan" class="img-fluid rounded-4 shadow-lg">
             </div>
             <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
                 <div class="section-title section-title-line">
