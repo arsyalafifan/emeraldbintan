@@ -99,8 +99,7 @@
                         }
                     },
                     {
-                        data: 'action',
-                        name: 'action',
+                        data: 'destinationid',
                         render: function(data, type, row) {
                             // 1. Buat URL dasar menggunakan route Laravel dengan placeholder ':id'
                             var editUrl = "{{ route('destination.edit', ':id') }}";

@@ -15,6 +15,7 @@ class PackageTravelRequest extends FormRequest
     {
         return [
             'packageTitle'  => 'required|string|max:255',
+            'packageDesc'  => 'required|string',
             'price'         => 'required|numeric|min:0',
 
             'tourTimeFrom' => ['nullable', 'regex:/^\d{2}:\d{2}$/'],

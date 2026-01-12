@@ -23,7 +23,7 @@
             </div>
             <hr class="mt-5 mb-3 border-secondary">
             <div class="text-center small">
-                &copy; 2023 Emerald Bintan Tour. All rights reserved.
+                &copy; 2026 Emerald Bintan Tour. All rights reserved.
             </div>
         </div>
     </footer>

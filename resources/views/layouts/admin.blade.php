@@ -20,7 +20,7 @@
   <link href="https://cdn.datatables.net/rowgroup/1.1.3/css/rowGroup.dataTables.min.css" rel="stylesheet" type="text/css" />
   <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
 
-  <title>NOMADS Admin</title>
+  <title>Emerald Bintan Admin</title>
 
   @include('includes.admin.style')
 

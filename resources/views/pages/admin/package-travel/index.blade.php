@@ -679,6 +679,51 @@
 
 
             // Store Header Travel Package
+            $('#formTambahPaket').on('submit', function (e) {
+                e.preventDefault();
+
+                // HANYA UNTUK MODE CREATE
+                if (headerMode !== 'create') return;
+
+                $.ajax({
+                    url: "{{ route('package-travel.store') }}",
+                    method: "POST",
+                    data: $(this).serialize(),
+                    success: function (res) {
+
+                        // isi id header
+                        $('#travelpackageid').val(res.travelpackageid);
+
+                        // ganti mode
+                        headerMode = 'edit';
+
+                        // snapshot data
+                        snapshotHeader();
+
+                        // form jadi readonly
+                        setHeaderReadonly(true);
+
+                        // tampilkan detail
+                        $('#detailSection').show();
+
+                        // init detail tables
+                        initAllDetailTables(res.travelpackageid);
+
+                        // switch tombol
+                        $('#headerActionCreate').addClass('d-none');
+                        $('#headerActionEdit').removeClass('d-none');
+                        $('#btnEditHeader').removeClass('d-none');
+                        $('#btnSaveHeader, #btnCancelHeader').addClass('d-none');
+
+                        // reload table utama
+                        $('#table_package').DataTable().ajax.reload(null, false);
+                    },
+                    error: function (xhr) {
+                        showAjaxError(xhr);
+                    }
+                });
+            });
+
             $('#modalTambahPaket').on('hidden.bs.modal', function () {
 
                 // mode kembali create

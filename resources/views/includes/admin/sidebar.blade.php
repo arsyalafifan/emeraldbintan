@@ -4,7 +4,7 @@
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
     <div class="sidebar-brand-text mx-3">
-      NOMADS Admin
+      Emerald Bintan Admin
     </div>
   </a>
 
@@ -30,7 +30,7 @@
       <span>Paket Travel</span></a>
   </li>
 
-  <li class="nav-item">
+  {{-- <li class="nav-item">
     <a class="nav-link" href="{{ route('gallery.index') }}">
       <i class="fas fa-fw fa-images"></i>
       <span>Galeri Travel</span></a>
@@ -40,7 +40,7 @@
     <a class="nav-link" href="{{ route('transaction.index') }}">
       <i class="fas fa-fw fa-dollar-sign"></i>
       <span>Transaksi</span></a>
-  </li>
+  </li> --}}
 
   <hr class="sidebar-divider">
 

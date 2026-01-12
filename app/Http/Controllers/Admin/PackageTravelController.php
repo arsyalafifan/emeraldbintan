@@ -82,6 +82,7 @@ class PackageTravelController extends BaseController
     public function store(PackageTravelRequest $request)
     {
         $data = $request->validated();
+        // dd($data);
 
         // Pastikan data konsisten
         if (!$data['isPromo']) {
@@ -95,14 +96,14 @@ class PackageTravelController extends BaseController
         $package = PackageTravel::create([
             'slug'         => Str::slug($data['packageTitle']),
             'packageTitle' => $data['packageTitle'],
-            'packageDesc'  => $data['packageDesc'],
-            'tourTimeFrom' => $data['tourTimeFrom'],
-            'tourTimeTo'   => $data['tourTimeTo'],
+            'packageDesc'  => $data['packageDesc'] ?? null, // ✅ FIX
+            'tourTimeFrom' => $data['tourTimeFrom'] ?? null,
+            'tourTimeTo'   => $data['tourTimeTo'] ?? null,
             'price'        => $data['price'],
-            'isPromo'      => $data['isPromo'],
-            'promoPrice'   => $data['promoPrice'],
-            'isRibbon'     => $data['isRibbon'],
-            'ribbonText'   => $data['ribbonText'],
+            'isPromo'      => $data['isPromo'] ?? 0,
+            'promoPrice'   => $data['promoPrice'] ?? null,
+            'isRibbon'     => $data['isRibbon'] ?? 0,
+            'ribbonText'   => $data['ribbonText'] ?? null,
             'addBy'        => auth()->id(),
         ]);
         return response()->json([
