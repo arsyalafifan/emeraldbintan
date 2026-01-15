@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Paket Wisata Bintan Murah & Terpercaya | Emerald Bintan Tour
+{{ tr('Paket Wisata Bintan Murah & Terpercaya | Emerald Bintan Tour') }}
 @endsection
 
 @section('content')
@@ -9,22 +9,22 @@ Paket Wisata Bintan Murah & Terpercaya | Emerald Bintan Tour
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8" data-aos="fade-up" data-aos-duration="1000">
-                <h1>Liburan Impian di Bintan Dimulai Di Sini</h1>
-                <p class="lead mb-4 text-white-50">Dapatkan penawaran eksklusif untuk paket wisata premium, staycation resort mewah, dan petualangan pulau.</p>
-                <a href="#paket" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom px-5 shadow">Pilih Paket Wisata</a>
+                <h1>{{ tr('Liburan Impian di Bintan Dimulai Di Sini') }}</h1>
+                <p class="lead mb-4 text-white-50">{{ tr('Dapatkan penawaran eksklusif untuk paket wisata premium, staycation resort mewah, dan petualangan pulau.') }}</p>
+                <a href="#paket" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom px-5 shadow">{{ tr('Pilih Paket Wisata') }}</a>
             </div>
         </div>
     </div>
     <a href="#paket" class="scroll-down"><i class="fas fa-chevron-down fa-2x"></i></a>
 </section>
 
-<section id="paket" class="section-padding bg-image-overlay-paket" 
+<section id="{{ section_id('paket') }}" class="section-padding bg-image-overlay-paket" 
       {{-- style="background-color: #fbfbfb;" --}}
       >
     <div class="container">
         <div class="section-title text-center section-title-line" data-aos="fade-up">
-            <h2>Pilihan Paket Wisata</h2>
-            <p class="text-muted">Temukan pengalaman terbaik sesuai budget dan gaya liburan Anda</p>
+            <h2>{{ tr('Pilihan Paket Wisata') }}</h2>
+            <p class="text-muted">{{ tr('Temukan pengalaman terbaik sesuai budget dan gaya liburan Anda') }}</p>
         </div>
 
         {{-- <div class="row justify-content-center" data-aos="zoom-in">
@@ -67,7 +67,7 @@ Paket Wisata Bintan Murah & Terpercaya | Emerald Bintan Tour
         <div class="row mb-5 justify-content-center" data-aos="fade-up">
             <div class="col-auto">
                 <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-all">Semua Paket</button></li>
+                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-all">{{ tr('Semua Paket') }}</button></li>
                     {{-- <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-oneday">One Day Trip</button></li>
                     <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-stay">Staycation</button></li> --}}
                 </ul>
@@ -143,18 +143,18 @@ Paket Wisata Bintan Murah & Terpercaya | Emerald Bintan Tour
                                                 $hours = floor($diff / 3600);
                                             }
                                         @endphp
-                                        {{ $hours }} Hours
+                                        {{ $hours }} {{ tr('Hours') }}
                                     </span>
 
                                     <span>
                                         <i class="fa-solid fa-location-dot"></i>
-                                        {{ $item->destinations->count() }} Destinations
+                                        {{ $item->destinations->count() }} {{ tr('Destinations') }}
                                     </span>
                                 </div>
                                 
                                 <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
                                     <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">Mulai dari</small>
+                                        <small class="text-muted d-block" style="font-size: 0.75rem;">{{ tr('Mulai dari') }}</small>
                                         @if($item->isPromo)
                                         <div>
                                             <small class="text-decoration-line-through text-muted">IDR {{ number_format($item->price, 0, ',', '.') }}</small>
@@ -165,7 +165,7 @@ Paket Wisata Bintan Murah & Terpercaya | Emerald Bintan Tour
                                         @endif
                                     </div>
                                     <button class="btn btn-sm btn-outline-primary rounded-pill btn-toggle-detail" type="button" data-bs-toggle="collapse" data-bs-target="#detail-{{ $item->travelpackageid }}">
-                                        Lihat Detail <i class="fas fa-chevron-down ms-1"></i>
+                                        {{ tr('Lihat Detail') }} <i class="fas fa-chevron-down ms-1"></i>
                                     </button>
                                 </div>
                                 <a href="https://wa.me/?text=Halo" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
@@ -354,9 +354,9 @@ Paket Wisata Bintan Murah & Terpercaya | Emerald Bintan Tour
             <div class="tab-pane fade" id="pills-stay"><p class="text-center py-5 text-muted">Memuat paket Staycation...</p></div>
         </div>
         
-        <div class="text-center mt-5">
-            <a href="#" class="btn btn-outline-primary rounded-pill px-4">Lihat Semua Paket <i class="fas fa-arrow-right ms-2"></i></a>
-        </div>
+        {{-- <div class="text-center mt-5">
+            <a href="#" class="btn btn-outline-primary rounded-pill px-4">{{ tr('Lihat Semua Paket') }} <i class="fas fa-arrow-right ms-2"></i></a>
+        </div> --}}
     </div>
 </section>
 

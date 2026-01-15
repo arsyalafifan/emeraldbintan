@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ app()->getLocale() }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +15,11 @@
     <meta property="og:description" content="Dapatkan paket tour Bintan lengkap mulai dari Rp 500rb. Klik untuk info detail." />
     <meta property="og:image" content="https://kabarsdgs.com/wp-content/uploads/2025/04/pantai-trikora-profile1695024664.jpg" /> <meta property="og:url" content="https://website-anda.com" />
     <meta property="og:type" content="website" />
+
+    <link rel="alternate" hreflang="id" href="{{ url('id') }}">
+    <link rel="alternate" hreflang="en" href="{{ url('en') }}">
+    <link rel="alternate" hreflang="x-default" href="{{ url('id') }}">
+
     <title>@yield('title')</title>
 
     @stack('prepend-style')

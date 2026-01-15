@@ -45,9 +45,40 @@
 
         /* --- Navbar --- */
         .navbar { background: white; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
-        .navbar-brand { font-weight: 800; color: var(--primary-color) !important; font-size: 1.5rem; }
+        .navbar-brand { font-weight: 800; color: #D2BF70 !important; font-size: 1.5rem; }
         .nav-link { font-weight: 500; margin-left: 15px; color: var(--text-dark); transition: 0.3s; }
         .nav-link:hover, .nav-link.active { color: var(--primary-color); }
+
+        .language-switcher {
+            gap: 8px;
+        }
+
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #555;
+            background: #f8f9fc;
+            border: 1px solid #ddd;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .lang-item img {
+            width: 18px;
+            height: auto;
+        }
+
+        .lang-item.active,
+        .lang-item:hover {
+            background-color: #4e73df;
+            color: #fff;
+            border-color: #4e73df;
+        }
 
         /* --- Hero Section --- */
         .hero-section {

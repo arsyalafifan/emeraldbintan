@@ -21,8 +21,16 @@ use App\Http\Controllers\Auth\VerificationController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])
-    ->name('home');
+// Route::get('/', [HomeController::class, 'index'])
+//     ->name('home');
+
+// Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'id|en']], function () {
+//     Route::get('/', [HomeController::class, 'index'])->name('home');
+// });
+
+Route::group(['prefix' => '{locale}'], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+});
 
 Route::get('/detail/{slug}', [DetailController::class, 'index'])
     ->name('detail');
