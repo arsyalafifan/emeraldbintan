@@ -2,8 +2,8 @@
 
 return [
     'beranda' => 'Home',
-    'paket' => 'Tour Packages',
-    'rental_mobil' => 'Car Rental',
-    'layanan_taxi' => 'Taxi Service',
-    'tentang_kami' => 'About Us'
+    'paket' => 'tour-packages',
+    'rental_mobil' => 'car-rental',
+    'layanan_taxi' => 'taxi-service',
+    'tentang_kami' => 'about-us'
 ];

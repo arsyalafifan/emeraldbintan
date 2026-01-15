@@ -2,8 +2,8 @@
 
 return [
     'beranda' => 'Beranda',
-    'paket' => 'Paket Tour',
-    'rental_mobil' => 'Rental Mobil',
-    'layanan_taxi' => 'Layanan Taxi',
-    'tentang_kami' => 'Tentang Kami'
+    'paket' => 'paket-tour',
+    'rental_mobil' => 'rental-mobil',
+    'layanan_taxi' => 'layanan-taxi',
+    'tentang_kami' => 'tentang-kami'
 ];

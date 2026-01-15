@@ -11,11 +11,11 @@
             <div class="col-lg-8" data-aos="fade-up" data-aos-duration="1000">
                 <h1>{{ tr('Liburan Impian di Bintan Dimulai Di Sini') }}</h1>
                 <p class="lead mb-4 text-white-50">{{ tr('Dapatkan penawaran eksklusif untuk paket wisata premium, staycation resort mewah, dan petualangan pulau.') }}</p>
-                <a href="#paket" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom px-5 shadow">{{ tr('Pilih Paket Wisata') }}</a>
+                <a href="#{{ section_id('paket') }}" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom px-5 shadow">{{ tr('Pilih Paket Wisata') }}</a>
             </div>
         </div>
     </div>
-    <a href="#paket" class="scroll-down"><i class="fas fa-chevron-down fa-2x"></i></a>
+    <a href="#{{ section_id('paket') }}" class="scroll-down"><i class="fas fa-chevron-down fa-2x"></i></a>
 </section>
 
 <section id="{{ section_id('paket') }}" class="section-padding bg-image-overlay-paket" 

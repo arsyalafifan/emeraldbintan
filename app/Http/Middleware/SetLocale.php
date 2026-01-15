@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\App;
+
 
 class SetLocale
 {
@@ -18,9 +20,9 @@ class SetLocale
         $locale = $request->segment(1);
 
         if (in_array($locale, ['id', 'en'])) {
-            app()->setLocale($locale);
+            App::setLocale($locale);
         } else {
-            app()->setLocale('id');
+            App::setLocale('id');
         }
 
         return $next($request);

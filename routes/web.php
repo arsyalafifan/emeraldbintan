@@ -32,9 +32,27 @@ use App\Http\Controllers\Auth\VerificationController;
 //     Route::get('/', [HomeController::class, 'index'])->name('home');
 // });
 
-Route::group(['prefix' => '{locale}', 'middleware' => 'setlocale'], function () {
-    Route::get('/', 'HomeController@index');
+Route::get('/', function () {
+    // Deteksi bahasa browser
+    $locale = request()->getPreferredLanguage(['id', 'en']);
+
+    // fallback default
+    if (!in_array($locale, ['id', 'en'])) {
+        $locale = 'id';
+    }
+
+    return redirect('/' . $locale);
 });
+
+
+Route::group([
+    'prefix' => '{locale}',
+    'where' => ['locale' => 'id|en'],
+    // 'middleware' => 'setlocale'
+], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+});
+
 
 Route::get('/detail/{slug}', [DetailController::class, 'index'])
     ->name('detail');
