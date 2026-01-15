@@ -360,7 +360,7 @@
     </div>
 </section>
 
-<section class="section-padding bg-white bg-image-overlay-whyus">
+{{-- <section class="section-padding bg-white bg-image-overlay-whyus">
     <div class="container">
         <div class="section-title text-center section-title-line" data-aos="fade-up">
             <h2>Mengapa Kami?</h2>
@@ -396,29 +396,118 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
-<section id="tentang" class="section-padding" style="background-color: #f0f2f5;">
+<section id="{{ section_id('tentang_kami') }}" class="section-padding" style="background-color: #f0f2f5;">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-                <img src="https://images.unsplash.com/photo-1576016770483-45853530b61c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Pemandangan Pantai Lagoi Bay Bintan" class="img-fluid rounded-4 shadow-lg">
-            </div>
-            <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
-                <div class="section-title section-title-line">
-                    <h2>Tentang Emerald Bintan</h2>
+        <div class="row align-items-center mb-5">
+            {{-- <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
+                <div class="position-relative">
+                    <img src="https://images.unsplash.com/photo-1576016770483-45853530b61c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Tim Emerald Bintan" class="img-fluid rounded-4 shadow-lg position-relative z-2">
+                    <div class="position-absolute bg-primary-custom rounded-4" style="width: 100%; height: 100%; top: 20px; left: -20px; z-index: 1; opacity: 0.1;"></div>
                 </div>
-                <p class="text-muted mb-4">Kami bukan sekadar agen perjalanan, kami adalah konsultan liburan Anda di Bintan. Dengan pengalaman lebih dari 5 tahun melayani ribuan wisatawan domestik dan mancanegara, kami paham betul bagaimana menciptakan momen liburan yang tak terlupakan.</p>
+            </div> --}}
+            
+            <div class="col-lg-12 ps-lg-5" data-aos="fade-left">
+                <div class="section-title section-title-line mb-4">
+                    <h2 class="text-primary-custom">Tentang Emerald Tour & Travel</h2>
+                </div>
                 
-                <h5 class="fw-bold mb-3 text-primary-custom" id="layanan">Layanan Kami Lainnya:</h5>
-                <div class="row g-2">
-                    <div class="col-md-6"><i class="fas fa-check-circle text-success me-2"></i>Sewa Mobil (Lepas Kunci/Driver)</div>
-                    <div class="col-md-6"><i class="fas fa-check-circle text-success me-2"></i>Tiket Ferry Batam - Bintan</div>
-                    <div class="col-md-6"><i class="fas fa-check-circle text-success me-2"></i>Company Gathering (MICE)</div>
-                    <div class="col-md-6"><i class="fas fa-check-circle text-success me-2"></i>Paket Golf Ria Bintan</div>
+                <p class="lead fw-bold text-dark">Partner Perjalanan Profesional Anda di Pulau Bintan.</p>
+                <p class="text-muted">
+                    Emerald Tour and Travel Bintan adalah perusahaan jasa pariwisata yang berbasis di Pulau Bintan, Kepulauan Riau. Kami fokus pada layanan tour, travel, dan rental mobil profesional untuk memberikan pengalaman perjalanan yang aman, nyaman, dan berkesan bagi wisatawan domestik maupun mancanegara.
+                </p>
+                <p class="text-muted mb-4">
+                    Dengan pemahaman mendalam tentang destinasi wisata lokal, kami menyediakan layanan fleksibel mulai dari liburan santai, perjalanan bisnis, hingga transportasi VIP yang disesuaikan dengan kebutuhan Anda.
+                </p>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="p-3 bg-white rounded-3 shadow-sm border-start border-4 border-primary h-100">
+                            <h5 class="fw-bold text-dark"><i class="fas fa-eye text-primary-custom me-2"></i>Visi</h5>
+                            <p class="small text-muted mb-0">Menjadi penyedia jasa tour dan travel terpercaya di Bintan yang dikenal akan profesionalisme, keandalan layanan, dan kepuasan pelanggan.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 bg-white rounded-3 shadow-sm border-start border-4 border-warning h-100">
+                            <h5 class="fw-bold text-dark"><i class="fas fa-bullseye text-warning me-2"></i>Misi</h5>
+                            <ul class="small text-muted mb-0 ps-3">
+                                <li>Memberikan pengalaman aman & menyenangkan.</li>
+                                <li>Layanan transportasi & tour profesional.</li>
+                                <li>Mendukung promosi pariwisata Bintan.</li>
+                                <li>Membangun hubungan jangka panjang.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="row g-4 mt-2">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-4 bg-white rounded-4 shadow-sm h-100">
+                    <h4 class="fw-bold mb-4 text-primary-custom"><i class="fas fa-concierge-bell me-2"></i>Layanan Kami</h4>
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="list-unstyled text-muted">
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>Paket Wisata Bintan & Sekitarnya</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>Tour Privat & Grup</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>Rental Mobil (Lepas Kunci / Driver)</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>Airport & Ferry Terminal Transfer</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>City Tour & Custom Itinerary</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>Transportasi Corporate & Event</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-4 bg-primary-custom text-white rounded-4 shadow-sm h-100">
+                    <h4 class="fw-bold mb-4 text-white"><i class="fas fa-thumbs-up me-2"></i>Mengapa Memilih Kami?</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="fas fa-map-marked-alt fa-lg me-3 mt-1 text-warning"></i>
+                            <div>
+                                <strong>Berbasis Lokal</strong>
+                                <br><span class="small opacity-75">Kami sangat memahami rute dan budaya lokal Bintan.</span>
+                            </div>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="fas fa-car fa-lg me-3 mt-1 text-warning"></i>
+                            <div>
+                                <strong>Armada Terawat</strong>
+                                <br><span class="small opacity-75">Kendaraan bersih, nyaman, dan rutin di-service.</span>
+                            </div>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="fas fa-tag fa-lg me-3 mt-1 text-warning"></i>
+                            <div>
+                                <strong>Harga Transparan</strong>
+                                <br><span class="small opacity-75">Harga kompetitif tanpa biaya tersembunyi.</span>
+                            </div>
+                        </li>
+                        <li class="mb-0 d-flex align-items-start">
+                            <i class="fas fa-smile fa-lg me-3 mt-1 text-warning"></i>
+                            <div>
+                                <strong>Layanan Ramah</strong>
+                                <br><span class="small opacity-75">Respon cepat dan driver yang sopan & profesional.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5" data-aos="fade-up">
+            <div class="col-12 text-center">
+                <p class="fs-5 fst-italic text-muted">"Emerald Tour and Travel Bintan siap menjadi partner perjalanan Anda untuk menjelajahi keindahan Bintan dengan tenang dan penuh kenyamanan."</p>
+                <div class="mt-4">
+                    <a href="https://wa.me/" class="btn btn-primary-custom px-4 shadow">Hubungi Tim Kami</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 
