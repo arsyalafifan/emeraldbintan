@@ -28,8 +28,12 @@ use App\Http\Controllers\Auth\VerificationController;
 //     Route::get('/', [HomeController::class, 'index'])->name('home');
 // });
 
-Route::group(['prefix' => '{locale}'], function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::group(['prefix' => '{locale}'], function () {
+//     Route::get('/', [HomeController::class, 'index'])->name('home');
+// });
+
+Route::group(['prefix' => '{locale}', 'middleware' => 'setlocale'], function () {
+    Route::get('/', 'HomeController@index');
 });
 
 Route::get('/detail/{slug}', [DetailController::class, 'index'])

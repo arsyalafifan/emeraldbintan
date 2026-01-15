@@ -18,7 +18,7 @@
 
     <link rel="alternate" hreflang="id" href="{{ url('id') }}">
     <link rel="alternate" hreflang="en" href="{{ url('en') }}">
-    <link rel="alternate" hreflang="x-default" href="{{ url('id') }}">
+    <link rel="alternate" hreflang="x-default" href="https://emeraldbintan.com/{{ app()->getLocale() }}">
 
     <title>@yield('title')</title>
 
