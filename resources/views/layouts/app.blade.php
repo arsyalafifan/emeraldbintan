@@ -20,6 +20,12 @@
     <link rel="alternate" hreflang="en" href="{{ url('en') }}">
     <link rel="alternate" hreflang="x-default" href="https://emeraldbintan.com/{{ app()->getLocale() }}">
 
+    <link rel="icon" href="{{ asset('frontend/images/emerald-bintan-logo.png') }}" type="image/png" />
+    <link rel="shortcut icon" href="{{ asset('frontend/images/emerald-bintan-logo.png') }}">
+
+    <link rel="apple-touch-icon" href="{{ asset('frontend/images/emerald-bintan-logo.png') }}">
+
+
     <title>@yield('title')</title>
 
     @stack('prepend-style')
