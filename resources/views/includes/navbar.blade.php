@@ -22,11 +22,22 @@
                     </div>
                     <li class="nav-item"><a class="nav-link" href="/{{ app()->getLocale() }}#{{ section_id('beranda') }}">{{ tr('Beranda') }}</a></li>
                     <li class="nav-item"><a class="nav-link active" href="/{{ app()->getLocale() }}#{{ section_id('paket') }}">{{ tr('Paket Tour') }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/{{ app()->getLocale() }}#{{ section_id('rental_mobil') }}">{{ tr('Rental Mobil') }}</a></li>
                     <li class="nav-item"><a class="nav-link" href="/{{ app()->getLocale() }}#{{ section_id('layanan_taxi') }}">{{ tr('Layanan Taxi') }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/{{ app()->getLocale() }}#{{ section_id('rental_mobil') }}">{{ tr('Rental Mobil') }}</a></li>
+                    {{-- <a href="/{{ app()->getLocale() }}/bintan-tour-packages">
+                        Tour Packages
+                    </a>
+
+                    <a href="/{{ app()->getLocale() }}/bintan-taxi-service">
+                        Taxi Service
+                    </a>
+
+                    <a href="/{{ app()->getLocale() }}/bintan-car-rental">
+                        Car Rental
+                    </a> --}}
                     <li class="nav-item"><a class="nav-link" href="/{{ app()->getLocale() }}#{{ section_id('tentang_kami') }}">{{ tr('Tentang Kami') }}</a></li>
                     <li class="nav-item ms-lg-3">
-                        <a href="https://wa.me/" class="btn btn-primary-custom">{{ tr('Hubungi Kami') }}</a>
+                        <a href="https://wa.me/6282284327726?text={{ urlencode(tr('Hi, I want to book a tour')) }}" class="btn btn-primary-custom">{{ tr('Hubungi Kami') }}</a>
                     </li>
                 </ul>
             </div>

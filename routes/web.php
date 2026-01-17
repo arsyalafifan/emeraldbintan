@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Admin\CarRentalImageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -51,6 +53,10 @@ Route::group([
     // 'middleware' => 'setlocale'
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::get('/bintan-tour-packages', 'HomeController@index')->name('tour');
+    Route::get('/bintan-taxi-service', 'HomeController@index')->name('taxi');
+    Route::get('/bintan-car-rental', 'HomeController@index')->name('rental');
 });
 
 
@@ -102,6 +108,22 @@ Route::prefix('admin')
         Route::get('/package-travel/excl/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'getPackageExclById'])->name('package-travel.excl');
         Route::post('/package-travel/excl', [\App\Http\Controllers\Admin\PackageTravelController::class, 'storePackageExcl'])->name('package-travel-excl.store');
         Route::post('/package-travel/excl/delete/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'deletePackageExcl'])->name('package-travel.excl.delete');
+
+        // Car Rental Service
+        Route::resource('car-rental', \App\Http\Controllers\Admin\CarRentalController::class);
+
+        // Taxi Service
+        Route::resource('taxi', \App\Http\Controllers\Admin\TaxiController::class);
+
+
+        Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+            // ...existing routes...
+            
+            // Car Rental Image Routes
+            Route::post('/car-rental-image/store', [CarRentalImageController::class, 'store'])->name('car-rental-image.store');
+            Route::get('/car-rental-image/list', [CarRentalImageController::class, 'list'])->name('car-rental-image.list');
+            Route::delete('/car-rental-image/{id}', [CarRentalImageController::class, 'destroy'])->name('car-rental-image.destroy');
+        });
     });
 
 // Authentication Routes

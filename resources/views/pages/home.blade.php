@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-{{ tr('Paket Wisata Bintan Murah & Terpercaya | Emerald Bintan Tour') }}
+{{ tr('Bintan Tour Packages, Taxi & Car Rental | Emerald Bintan Travel') }}
 @endsection
 
 @section('content')
-<section id="beranda" class="hero-section">
+<section id="{{ section_id('beranda') }}" class="hero-section">
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8" data-aos="fade-up" data-aos-duration="1000">
@@ -95,6 +95,7 @@
                                         @forelse ($item->images as $index => $img)
                                             <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                                 <img
+                                                    loading="lazy"
                                                     src="{{ asset('storage/' . $img->imgUrl) }}"
                                                     class="d-block w-100"
                                                     alt="{{ $item->packageTitle }}"
@@ -104,6 +105,7 @@
                                             {{-- fallback kalau belum ada image --}}
                                             <div class="carousel-item active">
                                                 <img
+                                                    loading="lazy"
                                                     src="https://via.placeholder.com/800x500?text=No+Image"
                                                     class="d-block w-100"
                                                     alt="No Image"
@@ -168,12 +170,12 @@
                                         {{ tr('Lihat Detail') }} <i class="fas fa-chevron-down ms-1"></i>
                                     </button>
                                 </div>
-                                <a href="https://wa.me/?text=Halo" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
+                                <a href="https://wa.me/6282284327726?text={{ urlencode(tr('Hi, I want to book ' . $item->packageTitle)) }}" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
                             </div>
 
                             <div class="collapse package-detail-collapse" id="detail-{{ $item->travelpackageid }}">
                                 <div class="detail-content">
-                                    <p class="text-muted small">{{ $item->packageDesc }}</p>
+                                    <p class="text-muted small">{{ tr($item->packageDesc) }}</p>
 
                                     <h6 class="detail-heading">Tour Time</h6>
                                     <ul class="list-unstyled itinerary-list small text-muted">
@@ -227,127 +229,6 @@
                         </div>
                     </div>
                   @endforeach
-                    {{-- <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="package-card"> 
-                            <div class="package-thumb">
-                                <div class="ribbon">BEST SELLER</div>
-                                <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Lagoi">
-                            </div>
-                            <div class="package-body">
-                                <h5 class="fw-bold mb-1">Lagoi Bay Explorer</h5>
-                                <div class="text-warning small mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                <p class="text-muted small">Jelajahi kawasan eksklusif Lagoi Bay, Treasure Bay, dan Safari Lagoi dalam 3 hari.</p>
-                                <div class="facility-icons">
-                                    <span><i class="fas fa-hotel"></i> Hotel</span>
-                                    <span><i class="fas fa-utensils"></i> Makan</span>
-                                    <span><i class="fas fa-car"></i> Mobil</span>
-                                </div>
-                                
-                                <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">Mulai dari</small>
-                                        <div class="price-final">IDR 2.450k</div>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-primary rounded-pill btn-toggle-detail" type="button" data-bs-toggle="collapse" data-bs-target="#detailLagoi" aria-expanded="false">
-                                        Lihat Detail <i class="fas fa-chevron-down ms-1"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="collapse package-detail-collapse" id="detailLagoi">
-                                <div class="detail-content">
-                                    <h6 class="detail-heading">Itinerary Singkat</h6>
-                                    <ul class="itinerary-list small text-muted">
-                                        <li><strong>Hari 1:</strong> Jemput Ferry, Check-in, Treasure Bay.</li>
-                                        <li><strong>Hari 2:</strong> Safari Lagoi, Mangrove Tour, BBQ.</li>
-                                        <li><strong>Hari 3:</strong> Belanja Souvenir, Drop Pelabuhan.</li>
-                                    </ul>
-                                    <a href="https://wa.me/?text=Halo" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                        <div class="package-card">
-                            <div class="package-thumb">
-                                <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gurun">
-                            </div>
-                            <div class="package-body">
-                                <h5 class="fw-bold mb-1">Bintan Desert Trip</h5>
-                                <div class="text-warning small mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                                <p class="text-muted small">Hunting foto di Gurun Pasir Busung & Danau Biru. Full day tour hemat.</p>
-                                <div class="facility-icons">
-                                    <span><i class="fas fa-ticket-alt"></i> Tiket</span>
-                                    <span><i class="fas fa-utensils"></i> Lunch</span>
-                                    <span><i class="fas fa-camera"></i> Guide</span>
-                                </div>
-                                
-                                <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">Mulai dari</small>
-                                        <div class="price-final">IDR 550k</div>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-primary rounded-pill btn-toggle-detail" type="button" data-bs-toggle="collapse" data-bs-target="#detailGurun" aria-expanded="false">
-                                        Lihat Detail <i class="fas fa-chevron-down ms-1"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="collapse package-detail-collapse" id="detailGurun">
-                                    <div class="detail-content">
-                                    <h6 class="detail-heading">Itinerary Singkat</h6>
-                                    <ul class="itinerary-list small text-muted">
-                                        <li><strong>10:30:</strong> Gurun Pasir & Danau Biru.</li>
-                                        <li><strong>13:00:</strong> Makan Siang Seafood.</li>
-                                        <li><strong>14:30:</strong> Vihara 1000 Wajah.</li>
-                                    </ul>
-                                    <a href="https://wa.me/?text=Halo" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                        <div class="package-card">
-                            <div class="package-thumb">
-                                <div class="ribbon blue">POPULAR</div>
-                                <img src="https://images.unsplash.com/photo-1583205310381-5031db68d226?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Snorkeling">
-                            </div>
-                            <div class="package-body">
-                                <h5 class="fw-bold mb-1">White Sands Snorkeling</h5>
-                                <div class="text-warning small mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                <p class="text-muted small">Snorkeling trip ke White Sands Island + BBQ Dinner di pinggir pantai.</p>
-                                <div class="facility-icons">
-                                    <span><i class="fas fa-swimmer"></i> Alat</span>
-                                    <span><i class="fas fa-ship"></i> Boat</span>
-                                    <span><i class="fas fa-fish"></i> BBQ</span>
-                                </div>
-                                
-                                <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">Mulai dari</small>
-                                        <div class="price-final">IDR 1.250k</div>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-primary rounded-pill btn-toggle-detail" type="button" data-bs-toggle="collapse" data-bs-target="#detailSnorkeling" aria-expanded="false">
-                                        Lihat Detail <i class="fas fa-chevron-down ms-1"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="collapse package-detail-collapse" id="detailSnorkeling">
-                                    <div class="detail-content">
-                                    <h6 class="detail-heading">Itinerary Singkat</h6>
-                                    <ul class="itinerary-list small text-muted">
-                                        <li><strong>Hari 1:</strong> Snorkeling, Kayak, BBQ.</li>
-                                        <li><strong>Hari 2:</strong> Sunrise, Pelepasan Tukik.</li>
-                                    </ul>
-                                    <a href="https://wa.me/?text=Halo" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-oneday"><p class="text-center py-5 text-muted">Memuat paket One Day Trip...</p></div>
@@ -360,43 +241,223 @@
     </div>
 </section>
 
-{{-- <section class="section-padding bg-white bg-image-overlay-whyus">
+<section id="{{ section_id('layanan_taxi') }}" class="section-padding bg-image-overlay-paket" 
+      {{-- style="background-color: #fbfbfb;" --}}
+      >
     <div class="container">
         <div class="section-title text-center section-title-line" data-aos="fade-up">
-            <h2>Mengapa Kami?</h2>
+            <h2>{{ tr('Pilihan Layanan Taxi') }}</h2>
+            <p class="text-muted">{{ tr('Temukan pengalaman terbaik sesuai budget dan gaya liburan Anda') }}</p>
         </div>
-        <div class="row g-4 text-center">
-            <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-                <div class="feature-box">
-                    <i class="fas fa-medal feature-icon"></i>
-                    <h5>Resmi & Terpercaya</h5>
-                    <p class="text-muted small">Legalitas lengkap dan berbadan hukum.</p>
-                </div>
-            </div>
-            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-box">
-                    <i class="fas fa-tags feature-icon"></i>
-                    <h5>Harga Jujur</h5>
-                    <p class="text-muted small">Tidak ada biaya tersembunyi (No Hidden Cost).</p>
-                </div>
-            </div>
-            <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
-                <div class="feature-box">
-                    <i class="fas fa-users-cog feature-icon"></i>
-                    <h5>Tim Profesional</h5>
-                    <p class="text-muted small">Guide lokal berpengalaman dan ramah.</p>
-                </div>
-            </div>
-            <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
-                <div class="feature-box">
-                    <i class="fas fa-clock feature-icon"></i>
-                    <h5>Layanan 24 Jam</h5>
-                    <p class="text-muted small">Support penuh selama Anda berlibur.</p>
-                </div>
+
+        <div class="row mb-5 justify-content-center" data-aos="fade-up">
+            <div class="col-auto">
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-all">{{ tr('Semua Taxi') }}</button></li>
+                    {{-- <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-oneday">One Day Trip</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-stay">Staycation</button></li> --}}
+                </ul>
             </div>
         </div>
+
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-all">
+                <div class="row g-4 align-items-start">
+                    <div class="col-12">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-0">
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover align-middle mb-0">
+                                        <thead style="background:#6fd4ff;color:#083c55">
+                                            <tr class="text-center">
+                                                <th>{{ tr('Destination') }}</th>
+                                                <th>7 {{ tr('Seats') }}<br>{{ tr('One Way') }}</th>
+                                                <th>7 {{ tr('Seats') }}<br>{{ tr('Two Ways') }}</th>
+                                                <th>HiAce 14 {{ tr('Seats') }}<br>{{ tr('One Way') }}</th>
+                                                <th>HiAce 14 {{ tr('Seats') }}<br>{{ tr('Two Ways') }}</th>
+                                                <th>{{ tr('Action') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($taxi as $t)
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            {{ tr(optional($t->destination)->destinationName) }}
+                                                        </strong>
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        {{ idr_short($t->price7seatoneway) }}
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        {{ idr_short($t->price7seattwoway) }}
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        {{ idr_short($t->price14seatoneway) }}
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        {{ idr_short($t->price14seattwoway) }}
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        <a
+                                                            href="https://wa.me/6282284327726?text={{ urlencode(
+                                                                tr('Hello, I want to book taxi service to') . ' ' .
+                                                                optional($t->destination)->destinationName
+                                                            ) }}"
+                                                            target="_blank"
+                                                            class="btn btn-sm btn-success rounded-pill px-3"
+                                                        >
+                                                            <i class="fab fa-whatsapp me-1"></i>
+                                                            {{ tr('Book Now') }}
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="6" class="text-center text-muted py-4">
+                                                        {{ tr('No taxi services available') }}
+                                                    </td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-oneday"><p class="text-center py-5 text-muted">Memuat paket One Day Trip...</p></div>
+            <div class="tab-pane fade" id="pills-stay"><p class="text-center py-5 text-muted">Memuat paket Staycation...</p></div>
+        </div>
+        
+        {{-- <div class="text-center mt-5">
+            <a href="#" class="btn btn-outline-primary rounded-pill px-4">{{ tr('Lihat Semua Paket') }} <i class="fas fa-arrow-right ms-2"></i></a>
+        </div> --}}
     </div>
-</section> --}}
+</section>
+
+<section id="{{ section_id('rental_mobil') }}" class="section-padding bg-image-overlay-paket">
+    <div class="container">
+
+        <div class="section-title text-center section-title-line" data-aos="fade-up">
+            <h2>{{ tr('Car Rental') }}</h2>
+            <p class="text-muted">{{ tr('Flexible car rental packages with competitive prices') }}</p>
+        </div>
+
+        {{-- TABLE --}}
+        <div class="table-responsive mb-5" data-aos="fade-up">
+            <table class="table table-bordered text-center align-middle rental-table">
+                <thead class="bg-primary-custom text-white">
+                    <tr>
+                        <th>{{ tr('Coach Type') }}</th>
+                        <th>{{ tr('Half Day') }}<br>(4 hrs)</th>
+                        <th>{{ tr('Full Day') }}<br>(8 hrs)</th>
+                        <th>{{ tr('Whole Day') }}<br>(12 hrs)</th>
+                        <th>{{ tr('Add Hrs') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($carRental as $car)
+                        <tr>
+                            <td class="fw-semibold">{{ $car->type }}</td>
+                            <td>{{ idr_short($car->pricehalfday) }}</td>
+                            <td>{{ idr_short($car->pricefullday) }}</td>
+                            <td>{{ idr_short($car->pricewholeday) }}</td>
+                            <td>{{ idr_short($car->priceadditional) }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-muted py-4">
+                                {{ tr('No car rental data available') }}
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        {{-- CAR RENTAL CARDS --}}
+        <div class="row g-4">
+            @foreach($carRental as $index => $car)
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="rental-card">
+
+                        {{-- IMAGE --}}
+                        <div class="rental-image">
+                            <div id="carCarousel{{ $car->carrentalserviceid }}" 
+                                class="carousel slide" 
+                                data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    @forelse($car->images as $i => $img)
+                                        <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
+                                            <img loading="lazy" src="{{ asset('storage/' . $img->imgUrl) }}" alt="{{ $car->type }}">
+                                        </div>
+                                    @empty
+                                        <div class="carousel-item active">
+                                            <img loading="lazy" src="https://via.placeholder.com/600x400?text=Car+Image">
+                                        </div>
+                                    @endforelse
+                                </div>
+
+                                @if($car->images->count() > 1)
+                                    <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#carCarousel{{ $car->carrentalserviceid }}"
+                                            data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                            data-bs-target="#carCarousel{{ $car->carrentalserviceid }}"
+                                            data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
+                                @endif
+                            </div>
+                        </div>
+
+                        {{-- BODY --}}
+                        <div class="rental-body">
+
+                            <h5 class="rental-title">{{ $car->type }}</h5>
+
+                            <div class="price-box">
+                                <div><span>IDR {{ idr_short($car->pricehalfday) }}</span> / 4 hours</div>
+                                <div><span>IDR {{ idr_short($car->pricefullday) }}</span> / 8 hours</div>
+                                <div><span>IDR {{ idr_short($car->pricewholeday) }}</span> / 12 hours</div>
+                                <div class="price-extra">
+                                    {{ tr('Additional hour') }}: {{ idr_short($car->priceadditional) }}
+                                </div>
+                            </div>
+
+                            @if($car->includes)
+                                <div class="include-box">
+                                    <strong>{{ tr('Includes') }}</strong>
+                                    <p>{!! nl2br(e($car->includes)) !!}</p>
+                                </div>
+                            @endif
+
+                            <a href="https://wa.me/6282284327726?text={{ urlencode('Hi, I want to rent '.$car->type) }}"
+                            target="_blank"
+                            class="btn btn-book">
+                                {{ tr('Book Now') }}
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            @endforeach
+        </div>
+
+    </div>
+</section>
+
 
 <section id="{{ section_id('tentang_kami') }}" class="section-padding" style="background-color: #f0f2f5;">
     <div class="container">
@@ -410,32 +471,32 @@
             
             <div class="col-lg-12 ps-lg-5" data-aos="fade-left">
                 <div class="section-title section-title-line mb-4">
-                    <h2 class="text-primary-custom">Tentang Emerald Tour & Travel</h2>
+                    <h2 class="text-primary-custom">{{ tr('Tentang Emerald Tour & Travel') }}</h2>
                 </div>
                 
-                <p class="lead fw-bold text-dark">Partner Perjalanan Profesional Anda di Pulau Bintan.</p>
+                <p class="lead fw-bold text-dark">{{ tr('Partner Perjalanan Profesional Anda di Pulau Bintan') }}</p>
                 <p class="text-muted">
-                    Emerald Tour and Travel Bintan adalah perusahaan jasa pariwisata yang berbasis di Pulau Bintan, Kepulauan Riau. Kami fokus pada layanan tour, travel, dan rental mobil profesional untuk memberikan pengalaman perjalanan yang aman, nyaman, dan berkesan bagi wisatawan domestik maupun mancanegara.
+                    {{ tr('Emerald Tour and Travel Bintan adalah perusahaan jasa pariwisata yang berbasis di Pulau Bintan, Kepulauan Riau. Kami fokus pada layanan tour, travel, dan rental mobil profesional untuk memberikan pengalaman perjalanan yang aman, nyaman, dan berkesan bagi wisatawan domestik maupun mancanegara.') }}
                 </p>
                 <p class="text-muted mb-4">
-                    Dengan pemahaman mendalam tentang destinasi wisata lokal, kami menyediakan layanan fleksibel mulai dari liburan santai, perjalanan bisnis, hingga transportasi VIP yang disesuaikan dengan kebutuhan Anda.
+                    {{ tr('Dengan pemahaman mendalam tentang destinasi wisata lokal, kami menyediakan layanan fleksibel mulai dari liburan santai, perjalanan bisnis, hingga transportasi VIP yang disesuaikan dengan kebutuhan Anda.') }}
                 </p>
 
                 <div class="row g-3">
                     <div class="col-md-6">
                         <div class="p-3 bg-white rounded-3 shadow-sm border-start border-4 border-primary h-100">
-                            <h5 class="fw-bold text-dark"><i class="fas fa-eye text-primary-custom me-2"></i>Visi</h5>
-                            <p class="small text-muted mb-0">Menjadi penyedia jasa tour dan travel terpercaya di Bintan yang dikenal akan profesionalisme, keandalan layanan, dan kepuasan pelanggan.</p>
+                            <h5 class="fw-bold text-dark"><i class="fas fa-eye text-primary-custom me-2"></i>{{ tr('Visi') }}</h5>
+                            <p class="small text-muted mb-0">{{ tr('Menjadi penyedia jasa tour dan travel terpercaya di Bintan yang dikenal akan profesionalisme, keandalan layanan, dan kepuasan pelanggan.') }}</p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="p-3 bg-white rounded-3 shadow-sm border-start border-4 border-warning h-100">
-                            <h5 class="fw-bold text-dark"><i class="fas fa-bullseye text-warning me-2"></i>Misi</h5>
+                            <h5 class="fw-bold text-dark"><i class="fas fa-bullseye text-warning me-2"></i>{{ tr('Misi') }}</h5>
                             <ul class="small text-muted mb-0 ps-3">
-                                <li>Memberikan pengalaman aman & menyenangkan.</li>
-                                <li>Layanan transportasi & tour profesional.</li>
-                                <li>Mendukung promosi pariwisata Bintan.</li>
-                                <li>Membangun hubungan jangka panjang.</li>
+                                <li>{{ tr('Memberikan pengalaman aman & menyenangkan.') }}</li>
+                                <li>{{ tr('Layanan transportasi & tour profesional.') }}</li>
+                                <li>{{ tr('Mendukung promosi pariwisata Bintan.') }}</li>
+                                <li>{{ tr('Membangun hubungan jangka panjang.') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -446,16 +507,16 @@
         <div class="row g-4 mt-2">
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-4 bg-white rounded-4 shadow-sm h-100">
-                    <h4 class="fw-bold mb-4 text-primary-custom"><i class="fas fa-concierge-bell me-2"></i>Layanan Kami</h4>
+                    <h4 class="fw-bold mb-4 text-primary-custom"><i class="fas fa-concierge-bell me-2"></i>{{ tr('Layanan Kami') }}</h4>
                     <div class="row">
                         <div class="col-12">
                             <ul class="list-unstyled text-muted">
-                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>Paket Wisata Bintan & Sekitarnya</li>
-                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>Tour Privat & Grup</li>
-                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>Rental Mobil (Lepas Kunci / Driver)</li>
-                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>Airport & Ferry Terminal Transfer</li>
-                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>City Tour & Custom Itinerary</li>
-                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>Transportasi Corporate & Event</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>{{ tr('Paket Wisata Bintan & Sekitarnya') }}</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>{{ tr('Tour Privat & Grup') }}</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>{{ tr('Rental Mobil (Lepas Kunci / Driver)') }}</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>{{ tr('Airport & Ferry Terminal Transfer') }}</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>{{ tr('City Tour & Custom Itinerary') }}</li>
+                                <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-success me-3"></i>{{ tr('Transportasi Corporate & Event') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -464,34 +525,34 @@
 
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                 <div class="p-4 bg-primary-custom text-white rounded-4 shadow-sm h-100">
-                    <h4 class="fw-bold mb-4 text-white"><i class="fas fa-thumbs-up me-2"></i>Mengapa Memilih Kami?</h4>
+                    <h4 class="fw-bold mb-4 text-white"><i class="fas fa-thumbs-up me-2"></i>{{ tr('Mengapa Memilih Kami?') }}</h4>
                     <ul class="list-unstyled">
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-map-marked-alt fa-lg me-3 mt-1 text-warning"></i>
                             <div>
-                                <strong>Berbasis Lokal</strong>
-                                <br><span class="small opacity-75">Kami sangat memahami rute dan budaya lokal Bintan.</span>
+                                <strong>{{ tr('Berbasis Lokal') }}</strong>
+                                <br><span class="small opacity-75">{{ tr('Kami sangat memahami rute dan budaya lokal Bintan.') }}</span>
                             </div>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-car fa-lg me-3 mt-1 text-warning"></i>
                             <div>
-                                <strong>Armada Terawat</strong>
-                                <br><span class="small opacity-75">Kendaraan bersih, nyaman, dan rutin di-service.</span>
+                                <strong>{{ tr('Armada Terawat') }}</strong>
+                                <br><span class="small opacity-75">{{ tr('Kendaraan bersih, nyaman, dan rutin di-service.') }}</span>
                             </div>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-tag fa-lg me-3 mt-1 text-warning"></i>
                             <div>
-                                <strong>Harga Transparan</strong>
-                                <br><span class="small opacity-75">Harga kompetitif tanpa biaya tersembunyi.</span>
+                                <strong>{{ tr('Harga Transparan') }}</strong>
+                                <br><span class="small opacity-75">{{ tr('Harga kompetitif tanpa biaya tersembunyi.') }}</span>
                             </div>
                         </li>
                         <li class="mb-0 d-flex align-items-start">
                             <i class="fas fa-smile fa-lg me-3 mt-1 text-warning"></i>
                             <div>
-                                <strong>Layanan Ramah</strong>
-                                <br><span class="small opacity-75">Respon cepat dan driver yang sopan & profesional.</span>
+                                <strong>{{ tr('Layanan Ramah') }}</strong>
+                                <br><span class="small opacity-75">{{ tr('Respon cepat dan driver yang sopan & profesional.') }}</span>
                             </div>
                         </li>
                     </ul>
@@ -501,9 +562,9 @@
 
         <div class="row mt-5" data-aos="fade-up">
             <div class="col-12 text-center">
-                <p class="fs-5 fst-italic text-muted">"Emerald Tour and Travel Bintan siap menjadi partner perjalanan Anda untuk menjelajahi keindahan Bintan dengan tenang dan penuh kenyamanan."</p>
+                <p class="fs-5 fst-italic text-muted">"{{ tr('Emerald Tour and Travel Bintan siap menjadi partner perjalanan Anda untuk menjelajahi keindahan Bintan dengan tenang dan penuh kenyamanan.') }}"</p>
                 <div class="mt-4">
-                    <a href="https://wa.me/" class="btn btn-primary-custom px-4 shadow">Hubungi Tim Kami</a>
+                    <a href="https://wa.me/6282284327726?text={{ urlencode(tr('Hi, I want to book a tour')) }}" class="btn btn-primary-custom px-4 shadow">{{ tr('Hubungi Tim Kami') }}</a>
                 </div>
             </div>
         </div>
@@ -514,13 +575,13 @@
 <section class="section-padding bg-white bg-image-overlay">
     <div class="container">
         <div class="section-title text-center section-title-line mb-5">
-            <h2>Galeri & Testimoni</h2>
+            <h2>{{ tr('Galeri & Testimoni') }}</h2>
         </div>
         
         <div class="row g-3 mb-5">
-            <div class="col-md-4 col-6" data-aos="zoom-in"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
-            <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="100"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1468413253725-0d5181091126?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
-            <div class="col-md-4 col-12" data-aos="zoom-in" data-aos-delay="200"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
+            <div class="col-md-4 col-6" data-aos="zoom-in"><div class="gallery-item"><img loading="lazy" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
+            <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="100"><div class="gallery-item"><img loading="lazy" src="https://images.unsplash.com/photo-1468413253725-0d5181091126?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
+            <div class="col-md-4 col-12" data-aos="zoom-in" data-aos-delay="200"><div class="gallery-item"><img loading="lazy" src="https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
         </div>
 
         <div class="row justify-content-center" data-aos="fade-up">
@@ -529,7 +590,7 @@
                     <i class="fas fa-quote-left fa-2x text-primary-custom mb-3 opacity-25"></i>
                     <figure>
                         <blockquote class="blockquote">
-                            <p class="fs-5 fst-italic">"Sangat puas dengan pelayanan Emerald Bintan. Drivernya on-time, mobil bersih, dan itinerary-nya fleksibel banget. Recommended!"</p>
+                            <p class="fs-5 fst-italic">"{{ tr('Sangat puas dengan pelayanan Emerald Bintan. Drivernya on-time, mobil bersih, dan itinerary-nya fleksibel banget. Recommended!') }}"</p>
                         </blockquote>
                         <figcaption class="blockquote-footer mt-2">
                             Anita Wijaya, <cite title="Source Title">Jakarta</cite>
@@ -543,9 +604,9 @@
 
 <section class="py-5 bg-primary-custom text-white text-center">
     <div class="container" data-aos="zoom-in">
-        <h2 class="fw-bold">Sudah Siap Berangkat?</h2>
-        <p class="mb-4 text-white-50">Konsultasikan rencana perjalanan Anda sekarang, Gratis!</p>
-        <a href="https://wa.me/" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom"><i class="fab fa-whatsapp me-2"></i>Chat WhatsApp</a>
+        <h2 class="fw-bold">{{ tr('Sudah Siap Berangkat?') }}</h2>
+        <p class="mb-4 text-white-50">{{ tr('Konsultasikan rencana perjalanan Anda sekarang, Gratis!') }}</p>
+        <a href="https://wa.me/6282284327726?text={{ urlencode(tr('Hi, I want to book a tour')) }}" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom"><i class="fab fa-whatsapp me-2"></i>{{ tr('Chat WhatsApp') }}</a>
     </div>
 </section>
 @endsection

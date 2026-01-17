@@ -29,4 +29,13 @@ class Destination extends Model
             'destinationid'
         );
     }
+
+    public function taxiServices()
+    {
+        return $this->hasMany(
+            TaxiService::class,
+            'destinationid',
+            'destinationid'
+        );
+    }
 }

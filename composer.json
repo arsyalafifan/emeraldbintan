@@ -42,7 +42,8 @@
             "database/factories"
         ],
         "files": [
-            "app/Helpers/TranslateHelper.php"
+            "app/Helpers/TranslateHelper.php",
+            "app/Helpers/Helpers.php"
         ]
     },
     "autoload-dev": {

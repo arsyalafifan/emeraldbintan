@@ -30,6 +30,18 @@
       <span>Paket Travel</span></a>
   </li>
 
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('taxi.index') }}">
+      <i class="fas fa-fw fa-car"></i>
+      <span>Taxi Service</span></a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('car-rental.index') }}">
+      <i class="fas fa-fw fa-car"></i>
+      <span>Car Rental Service</span></a>
+  </li>
+
   {{-- <li class="nav-item">
     <a class="nav-link" href="{{ route('gallery.index') }}">
       <i class="fas fa-fw fa-images"></i>

@@ -508,7 +508,7 @@
                     {data: 'tourTimeFrom', name: 'tourTimeFrom',
                         render: function(data, type, row){
                             if(row.tourTimeFrom != null){
-                                return row.tourTimeFrom;
+                                return row.tourTimeFrom.substring(0, 5); // Format HH:MM
                             } else {
                                 return '-';
                             }
@@ -517,7 +517,7 @@
                     {data: 'tourTimeTo', name: 'tourTimeTo',
                         render: function(data, type, row){
                             if(row.tourTimeTo != null){
-                                return row.tourTimeTo;
+                                return row.tourTimeTo.substring(0, 5); // Format HH:MM
                             } else {
                                 return '-';
                             }
@@ -526,7 +526,13 @@
                     {data: 'price', name: 'price',
                         render: function(data, type, row){
                             if(row.price != null){
-                                return row.price;
+                                var price = parseInt(row.price);
+                                if(price >= 1000000) {
+                                    return 'IDR ' + (price / 1000000).toFixed(1) + 'M';
+                                } else if(price >= 1000) {
+                                    return 'IDR ' + (price / 1000).toFixed(0) + 'K';
+                                }
+                                return 'IDR ' + price;
                             } else {
                                 return '-';
                             }
@@ -534,17 +540,23 @@
                     },
                     {data: 'isPromo', name: 'isPromo',
                         render: function(data, type, row){
-                            if(row.isPromo != null){
-                                return row.isPromo;
+                            if(row.isPromo){
+                                return '<span class="badge badge-success">Yes</span>';
                             } else {
-                                return '-';
+                                return '<span class="badge badge-secondary">No</span>';
                             }
                         }
                     },
                     {data: 'promoPrice', name: 'promoPrice',
                         render: function(data, type, row){
                             if(row.promoPrice != null){
-                                return row.promoPrice;
+                                var price = parseInt(row.promoPrice);
+                                if(price >= 1000000) {
+                                    return 'IDR ' + (price / 1000000).toFixed(1) + 'M';
+                                } else if(price >= 1000) {
+                                    return 'IDR ' + (price / 1000).toFixed(0) + 'K';
+                                }
+                                return 'IDR ' + price;
                             } else {
                                 return '-';
                             }
@@ -552,17 +564,17 @@
                     },
                     {data: 'isRibbon', name: 'isRibbon',
                         render: function(data, type, row){
-                            if(row.isRibbon != null){
-                                return row.isRibbon;
+                            if(row.isRibbon){
+                                return '<span class="badge badge-success">Yes</span>';
                             } else {
-                                return '-';
+                                return '<span class="badge badge-secondary">No</span>';
                             }
                         }
                     },
                     {data: 'ribbonText', name: 'ribbonText',
                         render: function(data, type, row){
-                            if(row.ribbonText != null){
-                                return row.ribbonText;
+                            if(row.isRibbon && row.ribbonText != null){
+                                return '<span class="badge badge-warning text-dark">' + row.ribbonText + '</span>';
                             } else {
                                 return '-';
                             }
@@ -666,15 +678,20 @@
 
             // show ajax error messages
             function showAjaxError(xhr) {
-                let msg = '';
+                let errorMessage = 'Terjadi kesalahan!';
+                
                 if (xhr.responseJSON?.errors) {
-                    $.each(xhr.responseJSON.errors, function (k, v) {
-                        msg += v[0] + '\n';
-                    });
-                } else {
-                    msg = 'Terjadi kesalahan';
+                    let errors = Object.values(xhr.responseJSON.errors).flat();
+                    errorMessage = errors.join(', ');
+                } else if (xhr.responseJSON?.message) {
+                    errorMessage = xhr.responseJSON.message;
                 }
-                alert(msg);
+                
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: errorMessage
+                });
             }
 
 
@@ -717,6 +734,15 @@
 
                         // reload table utama
                         $('#table_package').DataTable().ajax.reload(null, false);
+
+                        // SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'Paket travel berhasil ditambahkan',
+                            timer: 2000,
+                            timerProgressBar: true
+                        });
                     },
                     error: function (xhr) {
                         showAjaxError(xhr);
@@ -873,6 +899,15 @@
                         $('#btnEditHeader').removeClass('d-none');
 
                         $('#table_package').DataTable().ajax.reload(null, false);
+
+                        // SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'Paket travel berhasil diperbarui',
+                            timer: 2000,
+                            timerProgressBar: true
+                        });
                     },
                     error: function (xhr) {
                         showAjaxError(xhr);
@@ -959,6 +994,15 @@
                         $('#tableDest').on('draw.dt', function () {
                             fixModalScroll();
                         });
+
+                        // SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'Destinasi berhasil ditambahkan',
+                            timer: 2000,
+                            timerProgressBar: true
+                        });
                     },
                     error: function (xhr) {
                         showAjaxError(xhr);
@@ -982,6 +1026,14 @@
                         $('#tableDest').DataTable().ajax.reload(null, false);
                         $('#tableDest').on('draw.dt', function () {
                             fixModalScroll();
+                        });
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Terhapus!',
+                            text: 'Destinasi berhasil dihapus',
+                            timer: 2000,
+                            timerProgressBar: true
                         });
                     },
                     error: function () {
@@ -1107,6 +1159,14 @@
                         $('#tableImg').on('draw.dt', function () {
                             fixModalScroll();
                         });
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'Image berhasil ditambahkan',
+                            timer: 2000,
+                            timerProgressBar: true
+                        });
                     },
                     error: function (err) {
                         alert('Upload gagal');
@@ -1149,6 +1209,14 @@
                         $('#tableImg').DataTable().ajax.reload(null, false);
                         $('#tableImg').on('draw.dt', function () {
                             fixModalScroll();
+                        });
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Terhapus!',
+                            text: 'Image berhasil dihapus',
+                            timer: 2000,
+                            timerProgressBar: true
                         });
                     }
                 });
@@ -1222,6 +1290,14 @@
                         $('#tableIncl').on('draw.dt', function () {
                             fixModalScroll();
                         });
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'Include berhasil ditambahkan',
+                            timer: 2000,
+                            timerProgressBar: true
+                        });
                     },
                     error: function (xhr) {
                         showAjaxError(xhr);
@@ -1245,6 +1321,14 @@
                         $('#tableIncl').DataTable().ajax.reload(null, false);
                         $('#tableIncl').on('draw.dt', function () {
                             fixModalScroll();
+                        });
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Terhapus!',
+                            text: 'Include berhasil dihapus',
+                            timer: 2000,
+                            timerProgressBar: true
                         });
                     },
                     error: function () {
@@ -1316,6 +1400,14 @@
                         $('#tableExcl').on('draw.dt', function () {
                             fixModalScroll();
                         });
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'Exclude berhasil ditambahkan',
+                            timer: 2000,
+                            timerProgressBar: true
+                        });
                     },
                     error: function (xhr) {
                         showAjaxError(xhr);
@@ -1339,6 +1431,14 @@
                         $('#tableExcl').DataTable().ajax.reload(null, false);
                         $('#tableExcl').on('draw.dt', function () {
                             fixModalScroll();
+                        });
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Terhapus!',
+                            text: 'Exclude berhasil dihapus',
+                            timer: 2000,
+                            timerProgressBar: true
                         });
                     },
                     error: function () {

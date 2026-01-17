@@ -3,13 +3,13 @@
             <div class="row gy-4">
                 <div class="col-lg-4">
                     <h5 class="footer-title">Emerald Bintan</h5>
-                    <p class="small">Solusi perjalanan terbaik di Pulau Bintan dengan pelayanan standar internasional dan harga lokal.</p>
+                    <p class="small">{{ tr('Solusi perjalanan terbaik di Pulau Bintan dengan pelayanan standar internasional dan harga lokal.') }}</p>
                 </div>
                 <div class="col-lg-4">
-                    <h5 class="footer-title">Kontak</h5>
-                    <ul class="list-unstyled text-muted small">
+                    <h5 class="footer-title">{{ tr('Kontak') }}</h5>
+                    <ul class="list-unstyled small">
                         <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Tanjung Pinang, Kepri</li>
-                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +62 812 3456 7890</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +62 822-8432-7726</li>
                     </ul>
                 </div>
                 <div class="col-lg-4">

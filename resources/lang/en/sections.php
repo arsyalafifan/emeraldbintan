@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'beranda' => 'Home',
+    'beranda' => 'home',
     'paket' => 'tour-packages',
     'rental_mobil' => 'car-rental',
     'layanan_taxi' => 'taxi-service',

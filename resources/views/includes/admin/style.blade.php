@@ -4,3 +4,6 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ url('backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+  {{-- SweetAlert2 CSS --}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">

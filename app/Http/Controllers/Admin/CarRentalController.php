@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Destination;
-// use App\Http\Controllers\Controller;
+use App\CarRentalService;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Database\QueryException;
 use App\Http\Controllers\BaseController as BaseController;
-use Exception;
+use App\Http\Requests\Admin\CarRentalRequest;
 
-class DestinationController extends BaseController
+class CarRentalController extends BaseController
 {
+
     public $page;
 
     public function __construct()
     {
-        $this->page = 'Destination';
+        $this->page = 'Car Rental Service';
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\View
-     */
+
     public function index(Request $request)
     {
         if($request->ajax())
@@ -31,10 +29,10 @@ class DestinationController extends BaseController
             $page = $request->get('start', 0);  
             $perpage = $request->get('length',50);
             try {
-                $items = Destination::all();
+                $items = CarRentalService::all();
                 
-                $count = Destination::count();
-                $data = Destination::skip($page)->take($perpage)->get();
+                $count = CarRentalService::count();
+                $data = CarRentalService::skip($page)->take($perpage)->get();
             } 
             catch (QueryException $e) {
                 return $this->sendError('SQL Error', $this->getQueryError($e));
@@ -46,11 +44,11 @@ class DestinationController extends BaseController
             return $this->sendResponse([
                 'data' => $data,
                 'count' => $count
-            ], 'Destination retrieved successfully.');  
+            ], 'Car Rental Service retrieved successfully.');  
         }
 
         return view(
-            'pages.admin.destination.index', 
+            'pages.admin.car-rental.index', 
             [
                 'page' => $this->page, 
                 // 'createbutton' => true, 
@@ -59,77 +57,54 @@ class DestinationController extends BaseController
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
     public function create()
     {
-        return view('pages.admin.destination.create');
+        return view('pages.admin.car-rental.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request)
+    public function store(CarRentalRequest $request)
     {
         $data = $request->all();
         // $data['slug'] = Str::slug($request->title);
 
         $user = auth()->user();
         $data['addBy'] = $user ? $user->name : 'system';
-        Destination::create($data);
-        return redirect()->route('destination.index');
+        CarRentalService::create($data);
+        return redirect()->route('car-rental.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\View\View
-     */
     public function edit($id)
     {
-        $item = Destination::findOrFail($id);
+        $item = CarRentalService::findOrFail($id);
 
-        return view('pages.admin.destination.edit',[
+        return view('pages.admin.car-rental.edit',[
             'item' => $item
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(CarRentalRequest $request, $id)
     {
         $data = $request->all();
         $user = auth()->user();
 
-        $item = Destination::findOrFail($id);
+        $item = CarRentalService::findOrFail($id);
 
         $data['editBy'] = $user ? $user->name : 'system';
         $item->update($data);
 
-        return redirect()->route('destination.index');
+        return redirect()->route('car-rental.index');
     }
 
     public function destroy($id)
     {
-        $item = Destination::findorFail($id);
+        $item = CarRentalService::findorFail($id);
         $item->delete();
 
-        return redirect()->route('destination.index');
+        return redirect()->route('car-rental.index');
     }
 }

@@ -85,12 +85,17 @@
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
-            height: 85vh;
+            min-height: 100svh; /* mobile-safe viewport */
             display: flex;
             align-items: center;
             color: white;
             position: relative;
+            min-height: 100svh; /* mobile-safe viewport */
+            height: auto;
+            padding-top: 70px; /* tinggi navbar */
+            padding-bottom: 40px;
         }
+
         .hero-content h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; }
         .scroll-down {
             position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -186,6 +191,96 @@
         .facility-icons i { color: var(--primary-color); }
         
         .price-final { font-size: 1.3rem; font-weight: 800; color: var(--primary-color); }
+
+        /* rental car section */
+        /* CARD WRAPPER */
+        .rental-card {
+            background: #fff;
+            border-radius: 26px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* IMAGE */
+        .rental-image {
+            position: relative;
+            height: 260px;
+            overflow: hidden;
+        }
+        .rental-image img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+
+        /* BODY */
+        .rental-body {
+            padding: 22px;
+            background: #eff5f8;
+            border-radius: 22px;
+            margin: -30px 18px 18px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        /* TITLE */
+        .rental-title {
+            font-weight: 800;
+            font-size: 1.15rem;
+            margin-bottom: 14px;
+        }
+
+        /* PRICE LIST */
+        .price-box {
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+        }
+        .price-box div {
+            margin-bottom: 6px;
+        }
+        .price-box span {
+            font-weight: 700;
+            color: #0b5ed7;
+        }
+        .price-extra {
+            font-size: 0.85rem;
+            color: #1da7c4;
+            margin-top: 6px;
+        }
+
+        /* INCLUDE */
+        .include-box {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 18px;
+        }
+        .include-box strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* BUTTON */
+        .btn-book {
+            margin-top: auto;
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 30px;
+            padding: 10px 0;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .btn-book:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+        }
 
         /* --- Other Sections Styling --- */
         .feature-box {
