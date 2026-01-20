@@ -171,7 +171,7 @@
                                             @foreach($item->prices as $pr)
                                                 <div class="price-card p-3 border rounded-3" style="background: #f8f9fa; border: 1px solid #dee2e6;">
                                                     <div class="price-title mb-2">
-                                                        <p style="font-weight: bold; margin: 0; color: #083c55; font-size: 0.95rem;">{{ tr($pr->packagePriceTitle) }}</p>
+                                                        <p style="font-weight: bold; margin: 0; color: #083c55; font-size: 0.95rem;">{{ tr($pr->packagePriceTitle ?? '') }}</p>
                                                     </div>
                                                     <div class="price-display">
                                                         @if($pr->isPromo)
@@ -331,13 +331,13 @@
                                                 <tr>
                                                     <td>
                                                         <strong>
-                                                            {{ tr(optional($t->destinationFrom)->destinationName) }}
+                                                            {{ optional($t->destinationFrom)->destinationName }}
                                                         </strong>
                                                     </td>
 
                                                     <td>
                                                         <strong>
-                                                            {{ tr(optional($t->destination)->destinationName) }}
+                                                            {{ optional($t->destination)->destinationName }}
                                                         </strong>
                                                     </td>
 
