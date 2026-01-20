@@ -37,7 +37,7 @@
                     </a> --}}
                     <li class="nav-item"><a class="nav-link" href="/{{ app()->getLocale() }}#{{ section_id('tentang_kami') }}">{{ tr('Tentang Kami') }}</a></li>
                     <li class="nav-item ms-lg-3">
-                        <a href="https://wa.me/6282284327726?text={{ urlencode(tr('Hi, I want to book a tour')) }}" class="btn btn-primary-custom">{{ tr('Hubungi Kami') }}</a>
+                        <a href="https://wa.me/6285766256958?text={{ urlencode(tr('Hi, I want to book a tour')) }}" class="btn btn-primary-custom">{{ tr('Hubungi Kami') }}</a>
                     </li>
                 </ul>
             </div>

@@ -213,7 +213,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <a href="https://wa.me/6282284327726?text={{ urlencode(tr('Hi, I want to book ' . $item->packageTitle)) }}" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
+                                <a href="https://wa.me/6285766256958?text={{ urlencode(tr('Hi, I want to book ' . $item->packageTitle)) }}" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
                                 <a href="#" class="btn-link-toggle text-primary-custom text-center mt-2" role="button" data-bs-toggle="collapse" data-bs-target="#detail-{{ $item->travelpackageid }}" onclick="return false;">
                                     {{ tr('Lihat Detail') }} <i class="fas fa-chevron-down ms-1"></i>
                                 </a>
@@ -359,7 +359,7 @@
 
                                                     <td class="text-center">
                                                         <a
-                                                            href="https://wa.me/6282284327726?text={{ urlencode(
+                                                            href="https://wa.me/6285766256958?text={{ urlencode(
                                                                 tr('Hello, I want to book taxi service to') . ' ' .
                                                                 optional($t->destination)->destinationName
                                                             ) }}"
@@ -495,7 +495,7 @@
                                 </div>
                             @endif
 
-                            <a href="https://wa.me/6282284327726?text={{ urlencode('Hi, I want to rent '.$car->type) }}"
+                            <a href="https://wa.me/6285766256958?text={{ urlencode('Hi, I want to rent '.$car->type) }}"
                             target="_blank"
                             class="btn btn-book">
                                 {{ tr('Book Now') }}
@@ -617,7 +617,7 @@
             <div class="col-12 text-center">
                 <p class="fs-5 fst-italic text-muted">"{{ tr('Emerald Tour and Travel Bintan siap menjadi partner perjalanan Anda untuk menjelajahi keindahan Bintan dengan tenang dan penuh kenyamanan.') }}"</p>
                 <div class="mt-4">
-                    <a href="https://wa.me/6282284327726?text={{ urlencode(tr('Hi, I want to book a tour')) }}" class="btn btn-primary-custom px-4 shadow">{{ tr('Hubungi Tim Kami') }}</a>
+                    <a href="https://wa.me/6285766256958?text={{ urlencode(tr('Hi, I want to book a tour')) }}" class="btn btn-primary-custom px-4 shadow">{{ tr('Hubungi Tim Kami') }}</a>
                 </div>
             </div>
         </div>
@@ -659,7 +659,7 @@
     <div class="container" data-aos="zoom-in">
         <h2 class="fw-bold">{{ tr('Sudah Siap Berangkat?') }}</h2>
         <p class="mb-4 text-white-50">{{ tr('Konsultasikan rencana perjalanan Anda sekarang, Gratis!') }}</p>
-        <a href="https://wa.me/6282284327726?text={{ urlencode(tr('Hi, I want to book a tour')) }}" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom"><i class="fab fa-whatsapp me-2"></i>{{ tr('Chat WhatsApp') }}</a>
+        <a href="https://wa.me/6285766256958?text={{ urlencode(tr('Hi, I want to book a tour')) }}" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom"><i class="fab fa-whatsapp me-2"></i>{{ tr('Chat WhatsApp') }}</a>
     </div>
 </section>
 @endsection

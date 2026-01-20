@@ -9,7 +9,7 @@
                     <h5 class="footer-title">{{ tr('Kontak') }}</h5>
                     <ul class="list-unstyled small">
                         <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Tanjung Pinang, Kepri</li>
-                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +62 822-8432-7726</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +62 857-6625-6958</li>
                     </ul>
                 </div>
                 <div class="col-lg-4">
