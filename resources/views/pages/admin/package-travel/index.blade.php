@@ -78,11 +78,11 @@
                                 <input type="text" name="packageTitle" id="packageTitle" class="form-control" required>
                             </div>
 
-                            <!-- Harga -->
+                            {{-- <!-- Harga -->
                             <div class="col-md-6 mb-3">
                                 <label>Harga</label>
                                 <input type="number" name="price" id="price" class="form-control" min="0" required>
-                            </div>
+                            </div> --}}
 
                             <!-- Deskripsi -->
                             <div class="col-md-12 mb-3">
@@ -320,6 +320,8 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <form id="formTambahPrice">
                 @csrf
+                <input type="hidden" id="priceMode" value="create">
+                <input type="hidden" id="travelpackagepriceid" name="travelpackagepriceid">
                 <input type="hidden" id="price_travelpackageid" name="travelpackageid">
 
                 <div class="modal-content">
@@ -1201,9 +1203,14 @@
                             render: function (data) {
                                 return `
                                     <button 
+                                        class="btn btn-sm btn-info btnEditPrice"
+                                        data-id="${data}">
+                                        <i class="fa fa-pencil-alt"></i>
+                                    </button>
+                                    <button 
                                         class="btn btn-sm btn-danger btnDeletePrice"
                                         data-id="${data}">
-                                        Delete
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                 `;
                             }
@@ -1220,6 +1227,10 @@
                     return;
                 }
                 $('#price_travelpackageid').val(travelpackageid);
+                $('#priceMode').val('create');
+                $('#travelpackagepriceid').val('');
+                $('#formTambahPrice')[0].reset();
+                $('#modalTambahPrice .modal-title').text('Tambah Price');
                 $('#modalTambahPrice').modal('show');
             });
 
@@ -1228,16 +1239,29 @@
                 togglePromo();
             });
 
-            // Submit Tambah Price
+            // Submit Tambah / Edit Price
             $('#formTambahPrice').submit(function (e) {
                 e.preventDefault();
+                
+                let mode = $('#priceMode').val();
+                let priceId = $('#travelpackagepriceid').val();
+                let url = mode === 'create'
+                    ? "{{ route('package-travel.price.store') }}"
+                    : "{{ route('package-travel.price.update', ':id') }}".replace(':id', priceId);
+                
+                let formData = $(this).serialize();
+                if (mode === 'edit') {
+                    formData += '&_method=PUT';
+                }
+                
                 $.ajax({
-                    url: "{{ route('package-travel.price.store') }}",
+                    url: url,
                     method: "POST",
-                    data: $(this).serialize(),
+                    data: formData,
                     success: function () {
                         $('#modalTambahPrice').modal('hide');
                         $('#formTambahPrice')[0].reset();
+                        $('#priceMode').val('create');
 
                         $('#tablePrice').DataTable().ajax.reload(null, false);
                         $('#tablePrice').on('draw.dt', function () {
@@ -1248,7 +1272,7 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil!',
-                            text: 'Price berhasil ditambahkan',
+                            text: mode === 'create' ? 'Price berhasil ditambahkan' : 'Price berhasil diperbarui',
                             timer: 2000,
                             timerProgressBar: true
                         });
@@ -1257,6 +1281,26 @@
                         showAjaxError(xhr);
                     }
                 });
+            });
+
+            // Edit Price
+            $(document).on('click', '.btnEditPrice', function () {
+                let id = $(this).data('id');
+                let row = $('#tablePrice').DataTable().row($(this).parents('tr')).data();
+
+                $('#priceMode').val('edit');
+                $('#travelpackagepriceid').val(id);
+                $('#price_travelpackageid').val(row.travelpackageid);
+                $('#packagePriceTitle').val(row.packagePriceTitle);
+                $('#priceSeq').val(row.priceSeq);
+                $('#price').val(row.price);
+                $('#pricePer').val(row.pricePer);
+                $('#isPromoPrice').prop('checked', row.isPromo).trigger('change');
+                $('#promoPrice').val(row.promoPrice);
+                $('#priceDesc').val(row.priceDesc);
+
+                $('#modalTambahPrice .modal-title').text('Edit Price');
+                $('#modalTambahPrice').modal('show');
             });
 
             // Update Price - belum ada fitur update, hanya delete dan create
@@ -1287,6 +1331,14 @@
                         });
                     }
                 });
+            });
+
+            // Reset modal price saat ditutup
+            $('#modalTambahPrice').on('hidden.bs.modal', function () {
+                $('#formTambahPrice')[0].reset();
+                $('#priceMode').val('create');
+                $('#travelpackagepriceid').val('');
+                $('#modalTambahPrice .modal-title').text('Tambah Price');
             });
 
             // Image Table

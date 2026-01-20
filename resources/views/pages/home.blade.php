@@ -317,8 +317,8 @@
                                     <table class="table table-bordered table-hover align-middle mb-0">
                                         <thead style="background:#6fd4ff;color:#083c55">
                                             <tr class="text-center">
-                                                <th>{{ tr('Destination From') }}</th>
-                                                <th>{{ tr('Destination To') }}</th>
+                                                <th>{{ tr('From') }}</th>
+                                                <th>{{ tr('To') }}</th>
                                                 <th>7 {{ tr('Seats') }}<br>{{ tr('One Way') }}</th>
                                                 <th>7 {{ tr('Seats') }}<br>{{ tr('Two Ways') }}</th>
                                                 <th>HiAce 14 {{ tr('Seats') }}<br>{{ tr('One Way') }}</th>

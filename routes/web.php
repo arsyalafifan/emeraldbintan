@@ -102,7 +102,7 @@ Route::prefix('admin')
 
         Route::get('/package-travel/price/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'getAllPackagePricesById'])->name('package-travel.price');
         Route::post('/package-travel/price/store', [\App\Http\Controllers\Admin\PackageTravelController::class, 'storePackagePrice'])->name('package-travel.price.store');
-        Route::post('/package-travel/price/update/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'updatePackagePrice'])->name('package-travel.price.update');
+        Route::put('/package-travel/price/update/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'updatePackagePrice'])->name('package-travel.price.update');
         Route::post('/package-travel/price/delete/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'deletePackagePrice'])->name('package-travel.price.delete');
 
 
