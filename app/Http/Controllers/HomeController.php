@@ -54,7 +54,7 @@ class HomeController extends Controller
             ];
         }
 
-        $items = PackageTravel::with('images', 'destinations', 'includes', 'excludes')
+        $items = PackageTravel::with('images', 'destinations', 'prices', 'includes', 'excludes')
         ->whereNull('deleted_at')
         ->get();
 

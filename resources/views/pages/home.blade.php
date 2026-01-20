@@ -23,7 +23,7 @@
       >
     <div class="container">
         <div class="section-title text-center section-title-line" data-aos="fade-up">
-            <h2>{{ tr('Pilihan Paket Wisata') }}</h2>
+            <h2>{{ tr('Pilihan Paket Wisata Bintan') }}</h2>
             <p class="text-muted">{{ tr('Temukan pengalaman terbaik sesuai budget dan gaya liburan Anda') }}</p>
         </div>
 
@@ -67,7 +67,7 @@
         <div class="row mb-5 justify-content-center" data-aos="fade-up">
             <div class="col-auto">
                 <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-all">{{ tr('Semua Paket') }}</button></li>
+                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-all">{{ tr('Semua Paket Tur') }}</button></li>
                     {{-- <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-oneday">One Day Trip</button></li>
                     <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-stay">Staycation</button></li> --}}
                 </ul>
@@ -153,10 +153,10 @@
                                         {{ $item->destinations->count() }} {{ tr('Destinations') }}
                                     </span>
                                 </div>
-                                
-                                <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">{{ tr('Mulai dari') }}</small>
+
+                                <div class="mt-3 pt-3 border-top d-flex justify-content-center align-items-center">
+                                    <div style="width: 100%;">
+                                        {{-- <small class="text-muted d-block" style="font-size: 0.75rem;">{{ tr('Mulai dari') }}</small>
                                         @if($item->isPromo)
                                         <div>
                                             <small class="text-decoration-line-through text-muted">IDR {{ number_format($item->price, 0, ',', '.') }}</small>
@@ -164,13 +164,59 @@
                                         </div>
                                         @else
                                         <div class="price-final">IDR {{ number_format($item->price, 0, ',', '.') }}</div>
+                                        @endif --}}
+
+                                        @if($item->prices->count())
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                            @foreach($item->prices as $pr)
+                                                <div class="price-card p-3 border rounded-3" style="background: #f8f9fa; border: 1px solid #dee2e6;">
+                                                    <div class="price-title mb-2">
+                                                        <p style="font-weight: bold; margin: 0; color: #083c55; font-size: 0.95rem;">{{ tr($pr->packagePriceTitle) }}</p>
+                                                    </div>
+                                                    <div class="price-display">
+                                                        @if($pr->isPromo)
+                                                        <div>
+                                                            <small class="text-decoration-line-through text-muted d-block mb-1">IDR {{ number_format($pr->price, 0, ',', '.') }}</small>
+                                                            <h5 style="margin: 0; color: #dc3545; font-weight: bold; font-size: 1.1rem;">
+                                                                IDR {{ number_format($pr->promoPrice, 0, ',', '.') }}
+                                                                @if($pr->pricePer)
+                                                                <span style="font-size: 0.75rem;" class="text-muted">{{ " / " . $pr->pricePer }}</span>
+                                                                @endif
+                                                            </h5>
+                                                            <small class="text-success" style="font-weight: 500; display: block; margin-top: 5px;">
+                                                                @php
+                                                                    $savings = $pr->price - $pr->promoPrice;
+                                                                    $percentage = ($savings / $pr->price) * 100;
+                                                                @endphp
+                                                                Hemat IDR {{ number_format($savings, 0, ',', '.') }} ({{ round($percentage) }}%)
+                                                            </small>
+                                                        </div>
+                                                        @else
+                                                        <h5 style="margin: 0; color: #6fd4ff; font-weight: bold; font-size: 1.1rem;">
+                                                            IDR {{ number_format($pr->price, 0, ',', '.') }}
+                                                            @if($pr->pricePer)
+                                                            <span style="font-size: 0.75rem;" class="text-muted">{{ " / " . $pr->pricePer }}</span>
+                                                            @endif
+                                                        </h5>
+                                                        @endif
+                                                    </div>
+                                                    @if($pr->priceDesc)
+                                                    <div>
+                                                        <p style="color: #999; margin: 8px 0 0 0; font-size: 12px;">{{ $pr->priceDesc }}</p>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        @else
+                                        <p class="text-muted small fst-italic">No price available</p>
                                         @endif
                                     </div>
-                                    <button class="btn btn-sm btn-outline-primary rounded-pill btn-toggle-detail" type="button" data-bs-toggle="collapse" data-bs-target="#detail-{{ $item->travelpackageid }}">
-                                        {{ tr('Lihat Detail') }} <i class="fas fa-chevron-down ms-1"></i>
-                                    </button>
                                 </div>
                                 <a href="https://wa.me/6282284327726?text={{ urlencode(tr('Hi, I want to book ' . $item->packageTitle)) }}" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
+                                <a href="#" class="btn-link-toggle text-primary-custom text-center mt-2" role="button" data-bs-toggle="collapse" data-bs-target="#detail-{{ $item->travelpackageid }}" onclick="return false;">
+                                    {{ tr('Lihat Detail') }} <i class="fas fa-chevron-down ms-1"></i>
+                                </a>
                             </div>
 
                             <div class="collapse package-detail-collapse" id="detail-{{ $item->travelpackageid }}">
@@ -271,7 +317,8 @@
                                     <table class="table table-bordered table-hover align-middle mb-0">
                                         <thead style="background:#6fd4ff;color:#083c55">
                                             <tr class="text-center">
-                                                <th>{{ tr('Destination') }}</th>
+                                                <th>{{ tr('Destination From') }}</th>
+                                                <th>{{ tr('Destination To') }}</th>
                                                 <th>7 {{ tr('Seats') }}<br>{{ tr('One Way') }}</th>
                                                 <th>7 {{ tr('Seats') }}<br>{{ tr('Two Ways') }}</th>
                                                 <th>HiAce 14 {{ tr('Seats') }}<br>{{ tr('One Way') }}</th>
@@ -282,6 +329,12 @@
                                         <tbody>
                                             @forelse ($taxi as $t)
                                                 <tr>
+                                                    <td>
+                                                        <strong>
+                                                            {{ tr(optional($t->destinationFrom)->destinationName) }}
+                                                        </strong>
+                                                    </td>
+
                                                     <td>
                                                         <strong>
                                                             {{ tr(optional($t->destination)->destinationName) }}

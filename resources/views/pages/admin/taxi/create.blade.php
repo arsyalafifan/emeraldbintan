@@ -24,7 +24,16 @@
                 <form action="{{ route('taxi.store') }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="destinationid">Destination</label>
+                        <label for="destinationid_from">Destination From</label>
+                        <select class="form-control" name="destinationid_from">
+                            <option value="">Pilih Destination</option>
+                            @foreach($destinations as $destination)
+                                <option value="{{ $destination->destinationid }}">{{ $destination->destinationName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="destinationid">Destination To</label>
                         <select class="form-control" name="destinationid">
                             <option value="">Pilih Destination</option>
                             @foreach($destinations as $destination)

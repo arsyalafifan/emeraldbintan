@@ -29,8 +29,9 @@ class TaxiController extends BaseController
             $perpage = $request->get('length',50);
             try {
                 $count = TaxiService::count(); // Total records
-                $data = TaxiService::select('mt_taxi_services.*', 'mt_destination.destinationName')
-                    ->join('mt_destination', 'mt_destination.destinationid', '=', 'mt_taxi_services.destinationid')
+                $data = TaxiService::select('mt_taxi_services.*', 'mt_destination.destinationName as destinationName', 'mt_destination_from.destinationName as destinationNameFrom')
+                    ->leftJoin('mt_destination', 'mt_destination.destinationid', '=', 'mt_taxi_services.destinationid')
+                    ->leftJoin('mt_destination as mt_destination_from', 'mt_destination_from.destinationid', '=', 'mt_taxi_services.destinationid_from')
                     ->skip($page)
                     ->take($perpage)
                     ->get();

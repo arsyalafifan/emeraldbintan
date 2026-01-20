@@ -14,6 +14,7 @@ class TaxiService extends Model
 
     protected $fillable = [
         'destinationid',
+        'destinationid_from',
         'price7seatoneway',
         'price7seattwoway',
         'price14seatoneway',
@@ -25,5 +26,9 @@ class TaxiService extends Model
     public function destination()
     {
         return $this->belongsTo(Destination::class, 'destinationid', 'destinationid');
+    }
+    public function destinationFrom()
+    {
+        return $this->belongsTo(Destination::class, 'destinationid_from', 'destinationid');
     }
 }

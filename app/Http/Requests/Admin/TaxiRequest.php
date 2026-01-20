@@ -24,6 +24,7 @@ class TaxiRequest extends FormRequest
     public function rules()
     {
         return [
+            'destinationid_from' => 'required|exists:mt_destination,destinationid',
             'destinationid' => 'required|exists:mt_destination,destinationid',
             'price7seatoneway' => 'required|numeric|min:0',
             'price7seattwoway' => 'required|numeric|min:0',
@@ -35,8 +36,10 @@ class TaxiRequest extends FormRequest
     public function messages()
     {
         return [
-            'destinationid.required' => 'Destination wajib diisi',
-            'destinationid.exists' => 'Destination tidak valid',
+            'destinationid_from.required' => 'Destination From wajib diisi',
+            'destinationid_from.exists' => 'Destination From tidak valid',
+            'destinationid.required' => 'Destination To wajib diisi',
+            'destinationid.exists' => 'Destination To tidak valid',
             'price7seatoneway.required' => 'Harga 7 Seat One Way wajib diisi',
             'price7seattwoway.required' => 'Harga 7 Seat Two Way wajib diisi',
             'price14seatoneway.required' => 'Harga 14 Seat One Way wajib diisi',

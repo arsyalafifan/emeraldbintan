@@ -102,7 +102,7 @@
                                 <input type="time" name="tourTimeTo" id="tourTimeTo" class="form-control">
                             </div>
 
-                            <!-- Promo -->
+                            {{-- <!-- Promo -->
                             <div class="col-md-6 mb-3">
                                 <div class="form-check mt-4">
                                     <input type="checkbox" class="form-check-input" id="isPromo" name="isPromo" value="1">
@@ -114,7 +114,7 @@
                             <div class="col-md-6 mb-3">
                                 <label>Harga Promo</label>
                                 <input type="number" name="promoPrice" id="promoPrice" class="form-control" min="0">
-                            </div>
+                            </div> --}}
 
                             <!-- Ribbon -->
                             <div class="col-md-6 mb-3">
@@ -162,6 +162,9 @@
                                 <a class="nav-link active" data-toggle="tab" href="#tabDestination">Destination</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabPrice">Price</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabImage">Image</a>
                             </li>
                             <li class="nav-item">
@@ -181,6 +184,26 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Destinasi</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade show active" id="tabPrice">
+                                <button class="btn btn-sm btn-primary mb-2" id="btnAddPrice">Tambah Harga</button>
+                                <table class="table table-bordered" id="tablePrice" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Price Title</th>
+                                            <th>Price</th>
+                                            <th>Price Per</th>
+                                            <th>Promo?</th>
+                                            <th>Promo Price</th>
+                                            <th>Price Desc</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -280,6 +303,65 @@
                         </div>
                     </div>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Simpan
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{-- Modal Tambah Price --}}
+    <div class="modal fade" id="modalTambahPrice" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <form id="formTambahPrice">
+                @csrf
+                <input type="hidden" id="price_travelpackageid" name="travelpackageid">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Price</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Price Title</label>
+                            <input type="text" name="packagePriceTitle" id="packagePriceTitle" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price Sequence</label>
+                            <input type="number" name="priceSeq" id="priceSeq" class="form-control" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="number" name="price" id="price" class="form-control" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price Per</label>
+                            <input type="text" name="pricePer" id="pricePer" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check mt-2">
+                                <input type="checkbox" class="form-check-input" id="isPromoPrice" name="isPromo" value="1">
+                                <label class="form-check-label" for="isPromoPrice">Promo?</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Promo Price</label>
+                            <input type="number" name="promoPrice" id="promoPrice" class="form-control" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Price Description</label>
+                            <input type="text" name="priceDesc" id="priceDesc" class="form-control">
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             Batal
@@ -414,8 +496,9 @@
             let headerSnapshot = {};
 
             function togglePromo() {
-                if ($('#isPromo').is(':checked')) {
+                if ($('#isPromoPrice').is(':checked')) {
                     $('#promoPrice').prop('disabled', false);
+                    // $('#promoPrice').prop('disabled', false);
                 } else {
                     $('#promoPrice')
                         .prop('disabled', true)
@@ -435,6 +518,7 @@
 
             // Trigger saat checkbox diubah
             $('#isPromo').on('change', togglePromo);
+            $('#isPromoPrice').on('change', togglePromo);
             $('#isRibbon').on('change', toggleRibbon);
 
             // Trigger saat modal pertama kali dibuka
@@ -919,6 +1003,7 @@
             // Initialize all detail tables
             function initAllDetailTables(travelpackageid) {
                 initDestTable(travelpackageid);
+                initPriceTable(travelpackageid);
                 initImageTable(travelpackageid);
                 initInclTable(travelpackageid);
                 initExclTable(travelpackageid);
@@ -1038,6 +1123,168 @@
                     },
                     error: function () {
                         alert('Gagal menghapus data');
+                    }
+                });
+            });
+
+            // Price Table
+            function initPriceTable(travelpackageid) {
+                if ($.fn.DataTable.isDataTable('#tablePrice')) {
+                    $('#tablePrice').DataTable().ajax
+                        .url("{{ route('package-travel.price', ':id') }}".replace(':id', travelpackageid))
+                        .load();
+                    return;
+                }
+
+                $('#tablePrice').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('package-travel.price', ':id') }}".replace(':id', travelpackageid),
+                    columns: [
+                        {
+                            data: 'DT_RowIndex',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'packagePriceTitle',
+                            name: 'packagePriceTitle'
+                        },
+                        {
+                            data: 'price',
+                            name: 'price',
+                            render: function (data) {
+                                var price = parseInt(data);
+                                if(price >= 1000000) {
+                                    return 'IDR ' + (price / 1000000).toFixed(1) + 'M';
+                                } else if(price >= 1000) {
+                                    return 'IDR ' + (price / 1000).toFixed(0) + 'K';
+                                }
+                                return 'IDR ' + price;
+                            }
+                        },
+                        {
+                            data: 'pricePer',
+                            name: 'pricePer'
+                        },
+                        {
+                            data: 'isPromo',
+                            name: 'isPromo',
+                            render: function (data) {
+                                return data ? 'Yes' : 'No';
+                            }
+                        },
+                        {
+                            data: 'promoPrice',
+                            name: 'promoPrice',
+                            render: function (data) {
+                                var price = parseInt(data);
+                                if(price >= 1000000) {
+                                    return 'IDR ' + (price / 1000000).toFixed(1) + 'M';
+                                } else if(price >= 1000) {
+                                    return 'IDR ' + (price / 1000).toFixed(0) + 'K';
+                                }
+                                return 'IDR ' + price;
+                            }
+                        },
+                        {
+                            data: 'priceDesc',
+                            name: 'priceDesc',
+                            render: function (data) {
+                                return data ? data : '-';
+                            }
+                        },
+                        {
+                            data: 'travelpackagepriceid',
+                            orderable: false,
+                            searchable: false,
+                            render: function (data) {
+                                return `
+                                    <button 
+                                        class="btn btn-sm btn-danger btnDeletePrice"
+                                        data-id="${data}">
+                                        Delete
+                                    </button>
+                                `;
+                            }
+                        }
+                    ]
+                });
+            }
+
+            // Open Modal Tambah Price
+            $('#btnAddPrice').click(function () {
+                let travelpackageid = $('#travelpackageid').val();
+                if (!travelpackageid) {
+                    alert('Simpan header paket travel terlebih dahulu');
+                    return;
+                }
+                $('#price_travelpackageid').val(travelpackageid);
+                $('#modalTambahPrice').modal('show');
+            });
+
+            // Trigger saat modal tambah price pertama kali dibuka
+            $('#modalTambahPrice').on('shown.bs.modal', function () {
+                togglePromo();
+            });
+
+            // Submit Tambah Price
+            $('#formTambahPrice').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "{{ route('package-travel.price.store') }}",
+                    method: "POST",
+                    data: $(this).serialize(),
+                    success: function () {
+                        $('#modalTambahPrice').modal('hide');
+                        $('#formTambahPrice')[0].reset();
+
+                        $('#tablePrice').DataTable().ajax.reload(null, false);
+                        $('#tablePrice').on('draw.dt', function () {
+                            fixModalScroll();
+                        });
+
+                        // SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'Price berhasil ditambahkan',
+                            timer: 2000,
+                            timerProgressBar: true
+                        });
+                    },
+                    error: function (xhr) {
+                        showAjaxError(xhr);
+                    }
+                });
+            });
+
+            // Update Price - belum ada fitur update, hanya delete dan create
+            // ...
+
+            // Delete Price
+            $(document).on('click', '.btnDeletePrice', function () {
+                let id = $(this).data('id');
+                if (!confirm('Hapus price ini?')) return;
+                $.ajax({
+                    url: "{{ route('package-travel.price.delete', ':id') }}".replace(':id', id),
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function () {
+                        $('#tablePrice').DataTable().ajax.reload(null, false);
+                        $('#tablePrice').on('draw.dt', function () {
+                            fixModalScroll();
+                        });
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Terhapus!',
+                            text: 'Price berhasil dihapus',
+                            timer: 2000,
+                            timerProgressBar: true
+                        });
                     }
                 });
             });

@@ -26,7 +26,20 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="destinationid">Destination</label>
+                        <label for="destinationid_from">Destination From</label>
+                        <select class="form-control" name="destinationid_from">
+                            <option value="">Pilih Destination</option>
+                            @foreach($destinations as $destination)
+                                <option value="{{ $destination->destinationid }}"
+                                    {{ $destination->destinationid == old('destinationid_from', $item->destinationid_from) ? 'selected' : '' }}>
+                                    {{ $destination->destinationName }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destinationid">Destination To</label>
                         <select class="form-control" name="destinationid">
                             <option value="">Pilih Destination</option>
                             @foreach($destinations as $destination)

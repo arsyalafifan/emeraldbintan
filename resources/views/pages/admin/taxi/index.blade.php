@@ -20,7 +20,8 @@
                       <thead>
                       <tr>
                           {{-- <th>Destination ID</th> --}}
-                          <th>Destination</th>
+                          <th>Destination From</th>
+                          <th>Destination To</th>
                           <th>7 Seats One Way</th>
                           <th>7 Seats Two Way</th>
                           <th>14 Seats One Way</th>
@@ -73,6 +74,15 @@
                 },
                 columns: [
                     // {data: 'destinationid', name: 'destinationid', visible: false},
+                    {data: 'destinationNameFrom', name: 'destinationNameFrom',
+                        render: function(data, type, row){
+                            if(row.destinationNameFrom != null){
+                                return row.destinationNameFrom;
+                            } else {
+                                return '-';
+                            }
+                        }
+                    },
                     {data: 'destinationName', name: 'destinationName',
                         render: function(data, type, row){
                             if(row.destinationName != null){

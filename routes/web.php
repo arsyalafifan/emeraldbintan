@@ -95,16 +95,28 @@ Route::prefix('admin')
         Route::resource('destination', \App\Http\Controllers\Admin\DestinationController::class);
         // Package Travel
         Route::resource('package-travel', \App\Http\Controllers\Admin\PackageTravelController::class);
+
         Route::get('/package-travel/dest/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'getPackageDestById'])->name('package-travel.dest');
         Route::post('/package-travel/dest', [\App\Http\Controllers\Admin\PackageTravelController::class, 'storePackageDest'])->name('package-travel-dest.store');
         Route::post('/package-travel/dest/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'deletePackageDest'])->name('package-travel.dest.delete');
+
+        Route::get('/package-travel/price/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'getAllPackagePricesById'])->name('package-travel.price');
+        Route::post('/package-travel/price/store', [\App\Http\Controllers\Admin\PackageTravelController::class, 'storePackagePrice'])->name('package-travel.price.store');
+        Route::post('/package-travel/price/update/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'updatePackagePrice'])->name('package-travel.price.update');
+        Route::post('/package-travel/price/delete/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'deletePackagePrice'])->name('package-travel.price.delete');
+
+
         Route::get('/package-travel/image/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'getPackageImageById'])->name('package-travel.image');
         Route::post('/package-travel/image/store', [\App\Http\Controllers\Admin\PackageTravelController::class, 'storeImage'])->name('package-travel.image.store');
         Route::post('/package-travel/image/update', [\App\Http\Controllers\Admin\PackageTravelController::class, 'updateImage'])->name('package-travel.image.update');
         Route::post('/package-travel/image/delete/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'deleteImage'])->name('package-travel.image.delete');
+
+
         Route::get('/package-travel/incl/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'getPackageInclById'])->name('package-travel.incl');
         Route::post('/package-travel/incl', [\App\Http\Controllers\Admin\PackageTravelController::class, 'storePackageIncl'])->name('package-travel-incl.store');
         Route::post('/package-travel/incl/delete/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'deletePackageIncl'])->name('package-travel.incl.delete');
+
+
         Route::get('/package-travel/excl/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'getPackageExclById'])->name('package-travel.excl');
         Route::post('/package-travel/excl', [\App\Http\Controllers\Admin\PackageTravelController::class, 'storePackageExcl'])->name('package-travel-excl.store');
         Route::post('/package-travel/excl/delete/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'deletePackageExcl'])->name('package-travel.excl.delete');

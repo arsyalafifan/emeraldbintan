@@ -13,6 +13,7 @@ use App\PackageTravelDest;
 use App\PackageTravelExcl;
 use App\PackageTravelImg;
 use App\PackageTravelIncl;
+use App\PackageTravelPrices;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -175,6 +176,15 @@ class PackageTravelController extends BaseController
             ->make(true);
     }
 
+    public function getAllPackagePricesById($id)
+    {
+        $query = PackageTravelPrices::where('travelpackageid', $id)->orderBy('priceSeq', 'asc');
+
+        return DataTables::of($query)
+            ->addIndexColumn() // DT_RowIndex
+            ->make(true);
+    }
+
     public function getPackageImageById($id)
     {
         // $package = PackageTravelImg::where('travelpackageid', $id)->get();
@@ -262,6 +272,61 @@ class PackageTravelController extends BaseController
         return response()->json([
             'success' => true,
             'message' => 'Destination berhasil dihapus'
+        ]);
+    }
+
+    public function storePackagePrice(Request $request)
+    {
+        $data = $request->all();
+
+        $packagePrice = PackageTravelPrices::create([
+            'travelpackageid'   => $data['travelpackageid'],
+            'priceSeq'          => $data['priceSeq'],
+            'packagePriceTitle' => $data['packagePriceTitle'],
+            'price'             => $data['price'],
+            'pricePer'          => $data['pricePer'] ?? null,
+            'isPromo'           => $data['isPromo'] ?? 0,
+            'promoPrice'        => $data['promoPrice'] ?? null,
+            'priceDesc'         => $data['priceDesc'] ?? null,
+            'addBy'             => auth()->id(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'travelpackagepriceid' => $packagePrice->travelpackagepriceid,
+            'message' => 'Price berhasil ditambahkan'
+        ]);
+    }
+
+    public function updatePackagePrice(Request $request, $id)
+    {
+        $data = $request->all();
+
+        PackageTravelPrices::where('travelpackagepriceid', $id)
+        ->update([
+            'priceSeq'          => $data['priceSeq'],
+            'packagePriceTitle' => $data['packagePriceTitle'],
+            'price'             => $data['price'],
+            'pricePer'          => $data['pricePer'] ?? null,
+            'isPromo'           => $data['isPromo'] ?? 0,
+            'promoPrice'        => $data['promoPrice'] ?? null,
+            'priceDesc'         => $data['priceDesc'] ?? null,
+            'editBy'            => auth()->id(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Price berhasil diupdate'
+        ]);
+    }
+
+    public function deletePackagePrice($id)
+    {
+        PackageTravelPrices::where('travelpackagepriceid', $id)->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Price berhasil dihapus'
         ]);
     }
 

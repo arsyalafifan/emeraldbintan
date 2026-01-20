@@ -127,9 +127,22 @@ class DestinationController extends BaseController
 
     public function destroy($id)
     {
-        $item = Destination::findorFail($id);
-        $item->delete();
+        $destination = Destination::findOrFail($id);
 
-        return redirect()->route('destination.index');
-    }
+        // cek apakah masih dipakai
+        if (
+            $destination->packageTravelDestinations()->exists() ||
+            $destination->taxiServices()->exists()
+        ) {
+            return redirect()
+                ->back()
+                ->with('error', 'Destination tidak dapat dihapus karena masih digunakan di data lain.');
+        }
+
+        $destination->delete();
+
+        return redirect()
+            ->route('destination.index')
+            ->with('success', 'Destination berhasil dihapus.');
+        }
 }

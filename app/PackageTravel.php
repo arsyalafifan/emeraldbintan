@@ -56,6 +56,15 @@ class PackageTravel extends Model
         );
     }
 
+    public function prices()
+    {
+        return $this->hasMany(
+            PackageTravelPrices::class,
+            'travelpackageid',
+            'travelpackageid'
+        );
+    }
+
     public function includes()
     {
         return $this->hasMany(
