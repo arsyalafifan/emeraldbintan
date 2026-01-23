@@ -1127,7 +1127,7 @@
                             data: 'isPromo',
                             name: 'isPromo',
                             render: function (data) {
-                                return data ? 'Yes' : 'No';
+                                return data == '1' ? 'Yes' : 'No';
                             }
                         },
                         {
