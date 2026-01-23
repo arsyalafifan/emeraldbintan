@@ -1249,7 +1249,9 @@
                 $('#priceSeq').val(row.priceSeq);
                 $('#price').val(row.price);
                 $('#pricePer').val(row.pricePer);
-                $('#isPromoPrice').prop('checked', row.isPromo).trigger('change');
+                // Safe check untuk isPromo - convert ke boolean eksplisit
+                let isPromoChecked = row.isPromo === 1 || row.isPromo === '1' || row.isPromo === true;
+                $('#isPromoPrice').prop('checked', isPromoChecked).trigger('change');
                 $('#promoPrice').val(row.promoPrice);
                 $('#priceDesc').val(row.priceDesc);
 
