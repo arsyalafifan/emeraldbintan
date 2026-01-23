@@ -35,9 +35,6 @@
                           <th>Deskripsi</th>
                           <th>Tour Time From</th>
                           <th>Tour Time To</th>
-                          <th>Harga</th>
-                          <th>Promo?</th>
-                          <th>Harga Promo</th>
                           <th>Show Ribbon</th>
                           <th>Text Ribbon</th>
                           <th>Action</th>
@@ -335,15 +332,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Price Title</label>
-                            <input type="text" name="packagePriceTitle" id="packagePriceTitle" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Price Sequence</label>
-                            <input type="number" name="priceSeq" id="priceSeq" class="form-control" min="1" required>
+                            <input type="text" name="packagePriceTitle" id="packagePriceTitle" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Price</label>
-                            <input type="number" name="price" id="price" class="form-control" min="0" required>
+                            <input type="number" name="price" id="price" class="form-control" min="0">
                         </div>
                         <div class="form-group">
                             <label>Price Per</label>
@@ -604,45 +597,6 @@
                         render: function(data, type, row){
                             if(row.tourTimeTo != null){
                                 return row.tourTimeTo.substring(0, 5); // Format HH:MM
-                            } else {
-                                return '-';
-                            }
-                        }
-                    },
-                    {data: 'price', name: 'price',
-                        render: function(data, type, row){
-                            if(row.price != null){
-                                var price = parseInt(row.price);
-                                if(price >= 1000000) {
-                                    return 'IDR ' + (price / 1000000).toFixed(1) + 'M';
-                                } else if(price >= 1000) {
-                                    return 'IDR ' + (price / 1000).toFixed(0) + 'K';
-                                }
-                                return 'IDR ' + price;
-                            } else {
-                                return '-';
-                            }
-                        }
-                    },
-                    {data: 'isPromo', name: 'isPromo',
-                        render: function(data, type, row){
-                            if(row.isPromo){
-                                return '<span class="badge badge-success">Yes</span>';
-                            } else {
-                                return '<span class="badge badge-secondary">No</span>';
-                            }
-                        }
-                    },
-                    {data: 'promoPrice', name: 'promoPrice',
-                        render: function(data, type, row){
-                            if(row.promoPrice != null){
-                                var price = parseInt(row.promoPrice);
-                                if(price >= 1000000) {
-                                    return 'IDR ' + (price / 1000000).toFixed(1) + 'M';
-                                } else if(price >= 1000) {
-                                    return 'IDR ' + (price / 1000).toFixed(0) + 'K';
-                                }
-                                return 'IDR ' + price;
                             } else {
                                 return '-';
                             }
@@ -1162,7 +1116,7 @@
                                 } else if(price >= 1000) {
                                     return 'IDR ' + (price / 1000).toFixed(0) + 'K';
                                 }
-                                return 'IDR ' + price;
+                                return '-';
                             }
                         },
                         {
@@ -1186,7 +1140,7 @@
                                 } else if(price >= 1000) {
                                     return 'IDR ' + (price / 1000).toFixed(0) + 'K';
                                 }
-                                return 'IDR ' + price;
+                                return '-';
                             }
                         },
                         {

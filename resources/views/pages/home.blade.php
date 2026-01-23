@@ -174,7 +174,23 @@
                                                         <p style="font-weight: bold; margin: 0; color: #083c55; font-size: 0.95rem;">{{ tr($pr->packagePriceTitle ?? '') }}</p>
                                                     </div>
                                                     <div class="price-display">
-                                                        @if($pr->isPromo)
+                                                        @php
+                                                            // Safe checks untuk semua nilai
+                                                            $hasPrice = !is_null($pr->price) && $pr->price > 0;
+                                                            $hasPromoPrice = !is_null($pr->promoPrice) && $pr->promoPrice > 0;
+                                                            $isPromoValid = $pr->isPromo && $hasPrice && $hasPromoPrice;
+                                                            $savings = 0;
+                                                            $percentage = 0;
+                                                            
+                                                            if ($isPromoValid && $pr->price > 0) {
+                                                                $savings = max(0, $pr->price - $pr->promoPrice);
+                                                                if ($savings > 0) {
+                                                                    $percentage = ($savings / $pr->price) * 100;
+                                                                }
+                                                            }
+                                                        @endphp
+                                                        
+                                                        @if($isPromoValid && $savings > 0)
                                                         <div>
                                                             <small class="text-decoration-line-through text-muted d-block mb-1">IDR {{ number_format($pr->price, 0, ',', '.') }}</small>
                                                             <h5 style="margin: 0; color: #dc3545; font-weight: bold; font-size: 1.1rem;">
@@ -184,16 +200,19 @@
                                                                 @endif
                                                             </h5>
                                                             <small class="text-success" style="font-weight: 500; display: block; margin-top: 5px;">
-                                                                @php
-                                                                    $savings = $pr->price - $pr->promoPrice;
-                                                                    $percentage = ($savings / $pr->price) * 100;
-                                                                @endphp
-                                                                Hemat IDR {{ number_format($savings, 0, ',', '.') }} ({{ round($percentage) }}%)
+                                                                {{ tr('Hemat IDR') }} {{ number_format($savings, 0, ',', '.') }} ({{ round($percentage) }}%)
                                                             </small>
                                                         </div>
-                                                        @else
+                                                        @elseif($hasPrice)
                                                         <h5 style="margin: 0; color: #6fd4ff; font-weight: bold; font-size: 1.1rem;">
                                                             IDR {{ number_format($pr->price, 0, ',', '.') }}
+                                                            @if($pr->pricePer)
+                                                            <span style="font-size: 0.75rem;" class="text-muted">{{ " / " . $pr->pricePer }}</span>
+                                                            @endif
+                                                        </h5>
+                                                        @elseif($hasPromoPrice)
+                                                        <h5 style="margin: 0; color: #6fd4ff; font-weight: bold; font-size: 1.1rem;">
+                                                            IDR {{ number_format($pr->promoPrice, 0, ',', '.') }}
                                                             @if($pr->pricePer)
                                                             <span style="font-size: 0.75rem;" class="text-muted">{{ " / " . $pr->pricePer }}</span>
                                                             @endif

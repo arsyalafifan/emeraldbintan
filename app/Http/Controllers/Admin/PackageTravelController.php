@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\PackageTravel;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\PackageTravelRequest;
+use App\Http\Requests\Admin\PackageTravelPriceRequest;
 use Illuminate\Database\QueryException;
 use App\Http\Controllers\BaseController as BaseController;
 use App\PackageTravelDest;
@@ -275,13 +276,12 @@ class PackageTravelController extends BaseController
         ]);
     }
 
-    public function storePackagePrice(Request $request)
+    public function storePackagePrice(PackageTravelPriceRequest $request)
     {
         $data = $request->all();
 
         $packagePrice = PackageTravelPrices::create([
             'travelpackageid'   => $data['travelpackageid'],
-            'priceSeq'          => $data['priceSeq'],
             'packagePriceTitle' => $data['packagePriceTitle'],
             'price'             => $data['price'],
             'pricePer'          => $data['pricePer'] ?? null,
@@ -298,13 +298,12 @@ class PackageTravelController extends BaseController
         ]);
     }
 
-    public function updatePackagePrice(Request $request, $id)
+    public function updatePackagePrice(PackageTravelPriceRequest $request, $id)
     {
         $data = $request->all();
 
         PackageTravelPrices::where('travelpackagepriceid', $id)
         ->update([
-            'priceSeq'          => $data['priceSeq'],
             'packagePriceTitle' => $data['packagePriceTitle'],
             'price'             => $data['price'],
             'pricePer'          => $data['pricePer'] ?? null,
