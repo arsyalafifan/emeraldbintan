@@ -101,9 +101,9 @@ class PackageTravelController extends BaseController
             'packageDesc'  => $data['packageDesc'] ?? null, // ✅ FIX
             'tourTimeFrom' => $data['tourTimeFrom'] ?? null,
             'tourTimeTo'   => $data['tourTimeTo'] ?? null,
-            'price'        => $data['price'],
-            'isPromo'      => $data['isPromo'] ?? 0,
-            'promoPrice'   => $data['promoPrice'] ?? null,
+            // 'price'        => $data['price'],
+            // 'isPromo'      => $data['isPromo'] ?? 0,
+            // 'promoPrice'   => $data['promoPrice'] ?? null,
             'isRibbon'     => $data['isRibbon'] ?? 0,
             'ribbonText'   => $data['ribbonText'] ?? null,
             'addBy'        => auth()->id(),
