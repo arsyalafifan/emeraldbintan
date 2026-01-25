@@ -159,7 +159,7 @@
                                 <a class="nav-link active" data-toggle="tab" href="#tabDestination">Destination</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tabPrice">Price</a>
+                                <a class="nav-link" data-toggle="tab" href="#tabPrice">Price</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabImage">Image</a>
@@ -189,7 +189,7 @@
                                 </table>
                             </div>
 
-                            <div class="tab-pane fade show active" id="tabPrice">
+                            <div class="tab-pane fade" id="tabPrice">
                                 <button class="btn btn-sm btn-primary mb-2" id="btnAddPrice">Tambah Harga</button>
                                 <table class="table table-bordered" id="tablePrice" style="width:100%">
                                     <thead>
@@ -625,7 +625,7 @@
                         render: function(data, type, row) {
                             // 1. Buat URL dasar menggunakan route Laravel dengan placeholder ':id'
                             var editUrl = "{{ route('travel-package.edit', ':id') }}";
-                            var deleteUrl = "{{ route('travel-package.destroy', ':id') }}";
+                            var deleteUrl = "{{ route('package-travel.destroy', ':id') }}";
                             var travelpackageid = row.travelpackageid;
 
                             // 2. Ganti placeholder ':id' dengan id asli dari row data
@@ -844,6 +844,11 @@
                 setTimeout(() => {
                     if ($.fn.DataTable.isDataTable('#tableDest')) {
                         $('#tableDest').DataTable().destroy();
+                    }
+                }, 0);
+                setTimeout(() => {
+                    if ($.fn.DataTable.isDataTable('#tablePrice')) {
+                        $('#tablePrice').DataTable().destroy();
                     }
                 }, 0);
                 setTimeout(() => {
