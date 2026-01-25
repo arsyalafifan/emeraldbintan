@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CarRentalImageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocaleRedirectController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\LoginController;
@@ -34,17 +35,7 @@ use App\Http\Controllers\Auth\VerificationController;
 //     Route::get('/', [HomeController::class, 'index'])->name('home');
 // });
 
-Route::get('/', function () {
-    // Deteksi bahasa browser
-    $locale = request()->getPreferredLanguage(['id', 'en']);
-
-    // fallback default
-    if (!in_array($locale, ['id', 'en'])) {
-        $locale = 'id';
-    }
-
-    return redirect('/' . $locale);
-});
+Route::get('/', [LocaleRedirectController::class, 'redirect']);
 
 
 Route::group([
@@ -54,9 +45,12 @@ Route::group([
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/bintan-tour-packages', 'HomeController@index')->name('tour');
-    Route::get('/bintan-taxi-service', 'HomeController@index')->name('taxi');
-    Route::get('/bintan-car-rental', 'HomeController@index')->name('rental');
+    Route::get('/bintan-tour-packages', [HomeController::class, 'index'])->name('tour');
+    Route::get('/bintan-taxi-service', [HomeController::class, 'index'])->name('taxi');
+    Route::get('/bintan-car-rental', [HomeController::class, 'index'])->name('rental');
+    Route::get('/bintan-staycation', [HomeController::class, 'index'])->name('stay');
+    Route::get('/bintan-hotel-package', [HomeController::class, 'index'])->name('stay-hotel');
+
 });
 
 
@@ -120,6 +114,23 @@ Route::prefix('admin')
         Route::get('/package-travel/excl/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'getPackageExclById'])->name('package-travel.excl');
         Route::post('/package-travel/excl', [\App\Http\Controllers\Admin\PackageTravelController::class, 'storePackageExcl'])->name('package-travel-excl.store');
         Route::post('/package-travel/excl/delete/{id}', [\App\Http\Controllers\Admin\PackageTravelController::class, 'deletePackageExcl'])->name('package-travel.excl.delete');
+
+        // Package Stay
+        Route::resource('package-stay', \App\Http\Controllers\Admin\PackageStayController::class);
+
+        Route::get('/package-stay/price/{id}', [\App\Http\Controllers\Admin\PackageStayController::class, 'getAllPackagePricesById'])->name('package-stay.price');
+        Route::post('/package-stay/price/store', [\App\Http\Controllers\Admin\PackageStayController::class, 'storePackagePrice'])->name('package-stay.price.store');
+        Route::put('/package-stay/price/update/{id}', [\App\Http\Controllers\Admin\PackageStayController::class, 'updatePackagePrice'])->name('package-stay.price.update');
+        Route::post('/package-stay/price/delete/{id}', [\App\Http\Controllers\Admin\PackageStayController::class, 'deletePackagePrice'])->name('package-stay.price.delete');
+
+        Route::get('/package-stay/image/{id}', [\App\Http\Controllers\Admin\PackageStayController::class, 'getAllPackageImageById'])->name('package-stay.image');
+        Route::post('/package-stay/image/store', [\App\Http\Controllers\Admin\PackageStayController::class, 'storeImage'])->name('package-stay.image.store');
+        Route::post('/package-stay/image/update', [\App\Http\Controllers\Admin\PackageStayController::class, 'updateImage'])->name('package-stay.image.update');
+        Route::post('/package-stay/image/delete/{id}', [\App\Http\Controllers\Admin\PackageStayController::class, 'deleteImage'])->name('package-stay.image.delete');
+
+        Route::get('/package-stay/incl/{id}', [\App\Http\Controllers\Admin\PackageStayController::class, 'getAllPackageInclsById'])->name('package-stay.incl');
+        Route::post('/package-stay/incl', [\App\Http\Controllers\Admin\PackageStayController::class, 'storePackageIncl'])->name('package-stay-incl.store');
+        Route::post('/package-stay/incl/delete/{id}', [\App\Http\Controllers\Admin\PackageStayController::class, 'deletePackageIncl'])->name('package-stay.incl.delete');
 
         // Car Rental Service
         Route::resource('car-rental', \App\Http\Controllers\Admin\CarRentalController::class);

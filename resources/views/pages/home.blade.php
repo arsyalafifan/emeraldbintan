@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-{{ tr('Bintan Tour Packages, Taxi & Car Rental | Emerald Bintan Travel') }}
+{{ $seo['title'] ?? tr('Bintan Tour Packages, Taxi & Car Rental | Emerald Bintan Travel') }}
 @endsection
 
 @section('content')
@@ -26,43 +26,6 @@
             <h2>{{ tr('Pilihan Paket Wisata Bintan') }}</h2>
             <p class="text-muted">{{ tr('Temukan pengalaman terbaik sesuai budget dan gaya liburan Anda') }}</p>
         </div>
-
-        {{-- <div class="row justify-content-center" data-aos="zoom-in">
-            <div class="col-lg-12">
-                <div class="featured-deal">
-                    <div class="row g-0 align-items-center">
-                        <div class="col-lg-6 position-relative" style="height: 100%;">
-                            <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Special Deal" class="featured-img">
-                            <div class="position-absolute top-0 start-0 m-3 bg-danger text-white px-3 py-1 rounded fw-bold shadow">
-                                <i class="fas fa-fire me-1"></i> HOT PROMO
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="p-4 p-lg-5">
-                                <span class="badge bg-primary-custom mb-2">LIMITED OFFER</span>
-                                <h3 class="fw-bold mb-3">Emerald Luxury Escape (4D3N)</h3>
-                                <p class="text-muted mb-4">Nikmati kemewahan menginap di Private Pool Villa Bintan. Termasuk Candle Light Dinner, Spa, dan Private Tour keliling pulau dengan armada VIP.</p>
-                                
-                                <div class="row mb-4 small text-muted">
-                                    <div class="col-6 mb-2"><i class="fas fa-check text-success me-2"></i>Private Villa</div>
-                                    <div class="col-6 mb-2"><i class="fas fa-check text-success me-2"></i>VIP Transport</div>
-                                    <div class="col-6 mb-2"><i class="fas fa-check text-success me-2"></i>All-Inclusive Meals</div>
-                                    <div class="col-6 mb-2"><i class="fas fa-check text-success me-2"></i>Documentation</div>
-                                </div>
-
-                                <div class="d-flex align-items-center justify-content-between border-top pt-3">
-                                    <div>
-                                        <small class="text-decoration-line-through text-muted">IDR 8.500k</small>
-                                        <h3 class="fw-bold text-danger mb-0">IDR 4.250k</h3>
-                                    </div>
-                                    <a href="#" class="btn btn-primary-custom shadow">Ambil Promo</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
 
         <div class="row mb-5 justify-content-center" data-aos="fade-up">
             <div class="col-auto">
@@ -156,15 +119,6 @@
 
                                 <div class="mt-3 pt-3 border-top d-flex justify-content-center align-items-center">
                                     <div style="width: 100%;">
-                                        {{-- <small class="text-muted d-block" style="font-size: 0.75rem;">{{ tr('Mulai dari') }}</small>
-                                        @if($item->isPromo)
-                                        <div>
-                                            <small class="text-decoration-line-through text-muted">IDR {{ number_format($item->price, 0, ',', '.') }}</small>
-                                            <h3 class="fw-bold text-danger mb-0">IDR {{ number_format($item->promoPrice, 0, ',', '.') }}</h3>
-                                        </div>
-                                        @else
-                                        <div class="price-final">IDR {{ number_format($item->price, 0, ',', '.') }}</div>
-                                        @endif --}}
 
                                         @if($item->prices->count())
                                         <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -305,6 +259,173 @@
         </div> --}}
     </div>
 </section>
+
+<section id="{{ section_id('stay') }}" class="section-padding bg-image-overlay-paket">
+    <div class="container">
+
+        {{-- TITLE --}}
+        <div class="section-title text-center section-title-line" data-aos="fade-up">
+            <h2>{{ tr('Pilihan Paket Staycation di Bintan') }}</h2>
+            <p class="text-muted">
+                {{ tr('Nikmati pengalaman menginap terbaik di resort dan hotel pilihan Bintan') }}
+            </p>
+        </div>
+
+        {{-- CONTENT --}}
+        <div class="row g-4 align-items-start">
+            @forelse($stayItems as $stay)
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="package-card">
+
+                        {{-- IMAGE --}}
+                        <div class="package-thumb">
+                            @if($stay->isRibbon)
+                                <div class="ribbon blue">{{ $stay->ribbonText }}</div>
+                            @endif
+
+                            <div id="stayCarousel{{ $stay->staypackageid }}"
+                                 class="carousel slide"
+                                 data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    @forelse($stay->images as $i => $img)
+                                        <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
+                                            <img
+                                                loading="lazy"
+                                                src="{{ asset('storage/' . $img->imgUrl) }}"
+                                                class="d-block w-100"
+                                                alt="{{ $stay->stayTitle }}"
+                                            >
+                                        </div>
+                                    @empty
+                                        <div class="carousel-item active">
+                                            <img
+                                                loading="lazy"
+                                                src="https://via.placeholder.com/800x500?text=Stay+Image"
+                                                class="d-block w-100"
+                                                alt="Stay Image"
+                                            >
+                                        </div>
+                                    @endforelse
+                                </div>
+
+                                @if($stay->images->count() > 1)
+                                    <button class="carousel-control-prev"
+                                            type="button"
+                                            data-bs-target="#stayCarousel{{ $stay->staypackageid }}"
+                                            data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next"
+                                            type="button"
+                                            data-bs-target="#stayCarousel{{ $stay->staypackageid }}"
+                                            data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
+                                @endif
+                            </div>
+                        </div>
+
+                        {{-- BODY --}}
+                        <div class="package-body">
+                            <h5 class="fw-bold mb-2">{{ $stay->stayTitle }}</h5>
+
+                            {{-- PRICE --}}
+                            @if($stay->prices->count())
+                                <div class="mt-2 mb-3">
+                                    @foreach($stay->prices as $price)
+                                        @php
+                                            $hasPromo = $price->isPromo && $price->promoPrice;
+                                        @endphp
+
+                                        <div class="mb-2 p-2 rounded-3" style="background:#f8f9fa">
+                                            <div class="small fw-semibold text-muted">
+                                                {{ $price->stayPriceTitle }}
+                                            </div>
+
+                                            @if($hasPromo)
+                                                <small class="text-decoration-line-through text-muted">
+                                                    IDR {{ number_format($price->price,0,',','.') }}
+                                                </small>
+                                                <div class="fw-bold text-danger">
+                                                    IDR {{ number_format($price->promoPrice,0,',','.') }}
+                                                    @if($price->pricePer)
+                                                        <span class="small text-muted">/ {{ $price->pricePer }}</span>
+                                                    @endif
+                                                </div>
+                                            @else
+                                                <div class="fw-bold text-primary-custom">
+                                                    IDR {{ number_format($price->price,0,',','.') }}
+                                                    @if($price->pricePer)
+                                                        <span class="small text-muted">/ {{ $price->pricePer }}</span>
+                                                    @endif
+                                                </div>
+                                            @endif
+
+                                            @if($price->priceDesc)
+                                                <div class="small text-muted">
+                                                    {{ $price->priceDesc }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <p class="text-muted fst-italic small">
+                                    {{ tr('Harga belum tersedia') }}
+                                </p>
+                            @endif
+
+                            {{-- INCLUDE --}}
+                            @if($stay->includes->count())
+                                <ul class="list-unstyled small text-muted mb-3">
+                                    @foreach($stay->includes as $inc)
+                                        <li>
+                                            <i class="fa-solid fa-circle-check text-success me-1"></i>
+                                            {{ $inc->includeText }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+
+                            {{-- CTA --}}
+                            <a href="https://wa.me/628136814512?text={{ urlencode(tr('Hi, I want to book staycation ') . $stay->stayTitle) }}"
+                               target="_blank"
+                               class="btn btn-primary-custom w-100 btn-sm">
+                                <i class="fab fa-whatsapp me-2"></i>
+                                {{ tr('Booking Sekarang') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-12 text-center text-muted py-5">
+                    {{ tr('Belum ada paket stay tersedia') }}
+                </div>
+            @endforelse
+        </div>
+
+    </div>
+</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Emerald Bintan Staycation",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "Bintan",
+    "addressCountry": "ID"
+  },
+  "url": "{{ url('/bintan-staycation') }}",
+  "priceRange": "IDR",
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Resort & Hotel Stay"
+    }
+  ]
+}
+</script>
 
 <section id="{{ section_id('layanan_taxi') }}" class="section-padding bg-image-overlay-paket" 
       {{-- style="background-color: #fbfbfb;" --}}
@@ -646,31 +767,65 @@
 
 <section class="section-padding bg-white bg-image-overlay">
     <div class="container">
+
+        {{-- TITLE --}}
         <div class="section-title text-center section-title-line mb-5">
             <h2>{{ tr('Galeri & Testimoni') }}</h2>
-        </div>
-        
-        <div class="row g-3 mb-5">
-            <div class="col-md-4 col-6" data-aos="zoom-in"><div class="gallery-item"><img loading="lazy" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
-            <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="100"><div class="gallery-item"><img loading="lazy" src="https://images.unsplash.com/photo-1468413253725-0d5181091126?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
-            <div class="col-md-4 col-12" data-aos="zoom-in" data-aos-delay="200"><div class="gallery-item"><img loading="lazy" src="https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Galeri"></div></div>
+            <p class="text-muted">
+                {{ tr('Momen terbaik bersama Emerald Bintan Tour & Travel') }}
+            </p>
         </div>
 
+        {{-- GALLERY GRID --}}
+        <div class="row g-3 gallery-grid mb-5">
+            @forelse($gallery as $img)
+                <div class="col-lg-3 col-md-4 col-6" data-aos="zoom-in">
+                    <a href="{{ Storage::url($img->image) }}" 
+                       class="gallery-card"
+                       data-bs-toggle="modal"
+                       data-bs-target="#galleryModal"
+                       data-img="{{ Storage::url($img->image) }}">
+                        
+                        <img 
+                            loading="lazy"
+                            src="{{ Storage::url($img->image) }}" 
+                            alt="Bintan tour {{ $img->title ?? 'Emerald Bintan' }}"
+                        >
+
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </a>
+                </div>
+            @empty
+                <div class="col-12 text-center text-muted">
+                    {{ tr('Belum ada galeri tersedia') }}
+                </div>
+            @endforelse
+        </div>
+        <p class="text-muted text-center small mt-4">
+            {{ tr('Galeri perjalanan wisata Bintan, layanan taxi, dan rental mobil Emerald Bintan untuk wisatawan lokal dan internasional.') }}
+        </p>
+
+        {{-- TESTIMONIAL --}}
         <div class="row justify-content-center" data-aos="fade-up">
             <div class="col-lg-8 text-center">
-                <div class="card border-0 shadow-sm p-4 bg-light">
+                <div class="card border-0 shadow-sm p-4 bg-light testimonial-card">
                     <i class="fas fa-quote-left fa-2x text-primary-custom mb-3 opacity-25"></i>
                     <figure>
                         <blockquote class="blockquote">
-                            <p class="fs-5 fst-italic">"{{ tr('Sangat puas dengan pelayanan Emerald Bintan. Drivernya on-time, mobil bersih, dan itinerary-nya fleksibel banget. Recommended!') }}"</p>
+                            <p class="fs-5 fst-italic">
+                                "{{ tr('Sangat puas dengan pelayanan Emerald Bintan. Drivernya on-time, mobil bersih, dan itinerary-nya fleksibel banget. Recommended!') }}"
+                            </p>
                         </blockquote>
                         <figcaption class="blockquote-footer mt-2">
-                            Anita Wijaya, <cite title="Source Title">Jakarta</cite>
+                            Anita Wijaya, <cite>Jakarta</cite>
                         </figcaption>
                     </figure>
                 </div>
             </div>
         </div>
+
     </div>
 </section>
 
@@ -681,4 +836,37 @@
         <a href="https://wa.me/628136814512?text={{ urlencode(tr('Hi, I want to book a tour')) }}" class="btn btn-light btn-lg rounded-pill fw-bold text-primary-custom"><i class="fab fa-whatsapp me-2"></i>{{ tr('Chat WhatsApp') }}</a>
     </div>
 </section>
+{{-- GALLERY MODAL --}}
+<div class="modal fade" id="galleryModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-body p-0 text-center">
+                <img id="galleryModalImg" class="img-fluid rounded-4 shadow">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.gallery-card').forEach(el => {
+        el.addEventListener('click', function () {
+            document.getElementById('galleryModalImg').src = this.dataset.img;
+        });
+    });
+});
+</script>
+
+
+@if(!empty($seo['section']))
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const section = document.getElementById('{{ section_id($seo['section']) }}');
+        console.log(section);
+        if(section){
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+</script>
+@endif
 @endsection

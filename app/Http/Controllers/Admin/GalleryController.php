@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\GalleryRequest;
 use App\Gallery;
-use App\TravelPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -18,7 +17,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $items = Gallery::with(['travel_package'])->get();
+        $items = Gallery::get();
 
         return view('pages.admin.gallery.index',[
             'items' => $items,
@@ -32,10 +31,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        $travel_packages = TravelPackage::all();
-        return view('pages.admin.gallery.create',[
-            'travel_packages' => $travel_packages
-        ]);
+        return view('pages.admin.gallery.create');
     }
 
     /**
@@ -76,11 +72,9 @@ class GalleryController extends Controller
     public function edit($id)
     {
         $item = Gallery::findOrFail($id);
-        $travel_packages = TravelPackage::all();
 
         return view('pages.admin.gallery.edit',[
             'item' => $item,
-            'travel_packages' => $travel_packages
         ]);
     }
 

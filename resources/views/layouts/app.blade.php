@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="{{ tr('Book trusted Bintan tour packages, private taxi service, and car rental in Bintan. Affordable prices, professional drivers, and flexible itineraries.') }}">
+    <meta name="description" content="{{ $seo['description'] ?? 'Bintan tour, staycation, taxi and car rental service' }}">
     
     <meta name="keywords" content="paket wisata bintan, tour bintan, travel bintan, sewa mobil bintan, wisata lagoi, emerald bintan, bintan tour, taxi bintan, car rental bintan, bintan travel agent">
 

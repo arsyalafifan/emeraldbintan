@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\CarRentalService;
+use App\Gallery;
 use App\Http\Controllers\Admin\TaxiController;
+use App\PackageStay;
 use App\PackageTravel;
 use App\TaxiService;
 use Stichoza\GoogleTranslate\TranslateClient;
@@ -23,6 +25,7 @@ class HomeController extends Controller
     {
 
         $path = $request->path();
+        // dd($path);
 
         $seo = [
             'title' => 'Emerald Bintan Travel',
@@ -54,7 +57,20 @@ class HomeController extends Controller
             ];
         }
 
+        if (strpos($path, 'bintan-staycation') !== false) {
+            $seo = [
+                'title' => 'Bintan Staycation & Hotel Package | Emerald Bintan',
+                'description' => 'Best staycation and hotel packages in Bintan Island. Luxury resorts, family stay, honeymoon and business trips.',
+                'section' => 'paket_stay',
+            ];
+        }
+
+
         $items = PackageTravel::with('images', 'destinations', 'prices', 'includes', 'excludes')
+        ->whereNull('deleted_at')
+        ->get();
+
+        $stayItems = PackageStay::with('images', 'prices', 'includes')
         ->whereNull('deleted_at')
         ->get();
 
@@ -62,12 +78,16 @@ class HomeController extends Controller
 
         $carRRental = CarRentalService::with('images')->get();
 
+        $gallerry = Gallery::all();
+
         // dd($taxi);
 
         return view('pages.home', [
             'items' => $items,
+            'stayItems' => $stayItems,
             'taxi' => $taxi,
             'carRental' => $carRRental,
+            'gallery' => $gallerry,
             'seo' => $seo,
         ]);
     }

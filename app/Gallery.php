@@ -9,17 +9,14 @@ class Gallery extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'mt_gallery_travel';
+    
+
     protected $fillable = [
-        'travel_packages_id', 'image'
+        'travel_packages_id', 'image', 'gallery_name'
     ];
 
     protected $hidden = [
 
     ];
-
-    public function travel_package(){
-        return $this->belongsTo( TravelPackage::class, 'travel_packages_id', 'id' );
-    }
-
-
 }

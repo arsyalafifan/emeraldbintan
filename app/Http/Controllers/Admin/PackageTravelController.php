@@ -141,15 +141,11 @@ class PackageTravelController extends BaseController
         return response()->json(['success' => true]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        PackageTravel::where('travelpackageid', $id)->delete();
+
+        return redirect()->route('package-travel.index');
     }
 
     public function getPackageDestById($id)

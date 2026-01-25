@@ -46,8 +46,12 @@
         /* --- Navbar --- */
         .navbar { background: white; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
         .navbar-brand { font-weight: 800; color: #D2BF70 !important; font-size: 1.5rem; }
-        .nav-link { font-weight: 500; margin-left: 15px; color: var(--text-dark); transition: 0.3s; }
+        .navbar-nav {
+            gap: 6px;
+        }
+        .nav-link { font-weight: 500; margin-left:0; padding: 8px 12px; white-space: nowrap; color: var(--text-dark); transition: 0.3s; }
         .nav-link:hover, .nav-link.active { color: var(--primary-color); }
+        
 
         .language-switcher {
             gap: 8px;
@@ -282,6 +286,53 @@
             box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
         }
 
+        /* === GALLERY === */
+        .gallery-card {
+            position: relative;
+            display: block;
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: .3s ease;
+        }
+
+        .gallery-overlay i {
+            color: #fff;
+            font-size: 1.8rem;
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-card:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* testimonial */
+        .testimonial-card {
+            border-radius: 20px;
+        }
+
+
         /* --- Other Sections Styling --- */
         .feature-box {
             padding: 30px; background: white; border-radius: 12px;
@@ -299,5 +350,12 @@
         .footer-title { color: white; font-weight: 700; margin-bottom: 25px; }
         .footer-links a { color: #adb5bd; text-decoration: none; transition: 0.3s; }
         .footer-links a:hover { color: var(--primary-color); padding-left: 5px; }
+
+        @media (max-width: 991px) {
+            .navbar .btn-primary-custom {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
 
     </style>

@@ -23,16 +23,9 @@
             <div class="card-body">
                 <form action="{{ route('gallery.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label for="title">Paket Travel</label>
-                        <select name="travel_packages_id" required class="form-control">
-                            <option value="">Pilih Paket Travel</option>
-                            @foreach($travel_packages as $travel_package)
-                                <option value="{{ $travel_package->id }}">
-                                    {{ $travel_package->title }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="form-group>
+                        <label for="gallery_name">Gallery Name</label>
+                        <input type="text" class="form-control" name="gallery_name" placeholder="Gallery Name" >
                     </div>
                     <div class="form-group">
                         <label for="image">Image</label>
