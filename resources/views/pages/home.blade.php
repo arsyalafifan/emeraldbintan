@@ -363,7 +363,7 @@
 
                                             @if($price->priceDesc)
                                                 <div class="small text-muted">
-                                                    {{ $price->priceDesc }}
+                                                    {{ tr($price->priceDesc) }}
                                                 </div>
                                             @endif
                                         </div>
@@ -631,7 +631,7 @@
                             @if($car->includes)
                                 <div class="include-box">
                                     <strong>{{ tr('Includes') }}</strong>
-                                    <p>{!! nl2br(e($car->includes)) !!}</p>
+                                    <p>{!! nl2br(e(tr($car->includes))) !!}</p>
                                 </div>
                             @endif
 
