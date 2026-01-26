@@ -381,7 +381,7 @@
                                     @foreach($stay->includes as $inc)
                                         <li>
                                             <i class="fa-solid fa-circle-check text-success me-1"></i>
-                                            {{ $inc->includeText }}
+                                            {{ tr($inc->includeText) }}
                                         </li>
                                     @endforeach
                                 </ul>
