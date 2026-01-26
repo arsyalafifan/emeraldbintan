@@ -175,7 +175,7 @@
                                                     </div>
                                                     @if($pr->priceDesc)
                                                     <div>
-                                                        <p style="color: #999; margin: 8px 0 0 0; font-size: 12px;">{{ $pr->priceDesc }}</p>
+                                                        <p style="color: #999; margin: 8px 0 0 0; font-size: 12px;">{{ tr($pr->priceDesc) }}</p>
                                                     </div>
                                                     @endif
                                                 </div>
