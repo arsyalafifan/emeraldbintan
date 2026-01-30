@@ -15,9 +15,9 @@
                 <div class="col-lg-4">
                     <h5 class="footer-title">Follow Us</h5>
                     <div class="d-flex gap-3">
-                        <a href="#" class="fs-5"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="fs-5"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/emerald_bintan_indonesia?igsh=MmdyYzViYXNydjUy" class="fs-5"><i class="fab fa-instagram"></i></a>
+                        {{-- <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a> --}}
+                        <a href="https://www.tiktok.com/@emerald_bintan_?_r=1&_t=ZS-93PUp0RthZs" class="fs-5"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>

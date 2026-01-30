@@ -117,7 +117,63 @@
                                     </span>
                                 </div>
 
-                                <div class="mt-3 pt-3 border-top d-flex justify-content-center align-items-center">
+                                <div class="mt-3 pt-3 border-top">
+                                    @if($item->prices->count())
+                                        <div class="price-box-clean p-3 rounded-4">
+
+                                            @foreach($item->prices as $pr)
+                                                @php
+                                                    $hasPrice = !empty($pr->price) || !empty($pr->promoPrice);
+                                                    if (!$hasPrice) continue;
+
+                                                    $finalPrice = $pr->isPromo && $pr->promoPrice
+                                                        ? $pr->promoPrice
+                                                        : $pr->price;
+                                                @endphp
+
+                                                <div class="price-row mb-3">
+
+                                                    {{-- TITLE (OPTIONAL) --}}
+                                                    @if(!empty($pr->packagePriceTitle))
+                                                        <div class="price-title">
+                                                            {{ tr($pr->packagePriceTitle) }}
+                                                        </div>
+                                                    @endif
+
+                                                    {{-- PRICE --}}
+                                                    <div class="price-main">
+                                                        @if($pr->isPromo && $pr->promoPrice)
+                                                            <small class="old-price">
+                                                                IDR {{ number_format($pr->price, 0, ',', '.') }}
+                                                            </small>
+                                                        @endif
+
+                                                        <span class="price-amount">
+                                                            IDR {{ number_format($finalPrice, 0, ',', '.') }}
+                                                        </span>
+
+                                                        @if($pr->pricePer)
+                                                            <span class="price-per">
+                                                                / {{ $pr->pricePer }}
+                                                            </span>
+                                                        @endif
+                                                    </div>
+
+                                                    {{-- DESCRIPTION (OPTIONAL) --}}
+                                                    @if(!empty($pr->priceDesc))
+                                                        <div class="price-desc">
+                                                            {{ tr($pr->priceDesc) }}
+                                                        </div>
+                                                    @endif
+
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- <div class="mt-3 pt-3 border-top d-flex justify-content-center align-items-center">
                                     <div style="width: 100%;">
 
                                         @if($item->prices->count())
@@ -185,7 +241,7 @@
                                         <p class="text-muted small fst-italic">No price available</p>
                                         @endif
                                     </div>
-                                </div>
+                                </div> --}}
                                 <a href="https://wa.me/628136814512?text={{ urlencode(tr('Hi, I want to book ' . $item->packageTitle)) }}" class="btn btn-primary-custom w-100 btn-sm mt-3"><i class="fab fa-whatsapp me-2"></i>Booking</a>
                                 <a href="#" class="btn-link-toggle text-primary-custom text-center mt-2" role="button" data-bs-toggle="collapse" data-bs-target="#detail-{{ $item->travelpackageid }}" onclick="return false;">
                                     {{ tr('Lihat Detail') }} <i class="fas fa-chevron-down ms-1"></i>

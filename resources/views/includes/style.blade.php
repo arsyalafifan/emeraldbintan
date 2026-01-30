@@ -257,6 +257,49 @@
             margin-top: 6px;
         }
 
+        .price-box-clean {
+            background: #ecf2f4;
+            border: 1px solid #aab9c0;
+        }
+
+        .price-row {
+            line-height: 1.4;
+        }
+
+        .price-title {
+            font-weight: 600;
+            color: #083c55;
+            font-size: 0.95rem;
+        }
+
+        .price-main {
+            font-weight: 700;
+            color: #083c55;
+        }
+
+        .price-amount {
+            font-size: 1.05rem;
+        }
+
+        .price-per {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .old-price {
+            display: block;
+            font-size: 0.8rem;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .price-desc {
+            font-size: 0.75rem;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+
         /* INCLUDE */
         .include-box {
             font-size: 0.85rem;
